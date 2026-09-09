@@ -1,0 +1,32 @@
+import Image from "next/image";
+import { Conversations } from "@/components/conversations";
+import { Journey } from "@/components/journey";
+
+export default function Home() {
+  return <>
+    <main id="main">
+      <section className="reference-hero" aria-labelledby="hero-title">
+        <div className="reference-stars" aria-hidden="true">{Array.from({length:180}, (_,i)=><i key={i} style={{left:`${(i * 61.80339887) % 100}%`,top:`${(i * 37.137) % 100}%`,opacity:.15+(i%5)*.06}} />)}</div>
+        <Image className="reference-portrait" src="/images/raj.webp" alt="Raj Shamani" width={1067} height={1376} priority sizes="53vw" />
+        <Image className="reference-mic" src="/images/mic.webp" alt="" width={2254} height={1454} priority sizes="38vw" />
+        <svg className="reference-wire wire-one" viewBox="0 0 180 180" fill="none" aria-hidden="true"><path d="M20 25 125 25 160 65 155 175 5 170 20 25 155 175 125 25 5 170 160 65 20 25 65 55 155 175M65 55 125 25M65 55 5 170M160 65 65 55" /></svg>
+        <svg className="reference-wire wire-two" viewBox="0 0 180 180" fill="none" aria-hidden="true"><path d="m5 85 75-70 95 70-90 85L5 85l170 0M80 15l5 155M5 85l110-35 60 35-65 40L5 85M115 50l-5 75M80 15l35 35-30 120" /></svg>
+        <div className="reference-copy">
+          <p className="reference-eyebrow">THE ARCHITECT OF INDIA&apos;S PASSION ECONOMY</p>
+          <h1 id="hero-title">Figuring Out Life,<br/><span>Together.</span></h1>
+          <p className="reference-description">Hover over the community to discover their stories. A tribute to figuring out life,<br className="desktop-break"/> together.</p>
+        </div>
+        <div className="reference-community">
+          <Image src="/images/conversations.webp" alt="Nitin Gadkari, Vijay Mallya, Nikhil Kamath, Bill Gates, Raj Shamani, S. Jaishankar, Emmanuel Macron, and Ritesh Agarwal" width={2048} height={2048} priority sizes="(max-width: 700px) 96vw, 52vw" />
+          <div className="community-links">{["Nitin Gadkari", "Vijay Mallya", "Nikhil Kamath", "Bill Gates", "Raj Shamani", "S. Jaishankar", "Emmanuel Macron", "Ritesh Agarwal"].map(name=><a key={name} href="#conversations" aria-label={`Discover ${name}'s story`}><span>{name}</span></a>)}</div>
+        </div>
+      </section>
+      <div className="ticker" aria-hidden="true"><div>CURIOSITY <span>✳</span> CONVERSATIONS <span>✳</span> PERSPECTIVE <span>✳</span> ENTREPRENEURSHIP <span>✳</span> KEEP FIGURING OUT <span>✳</span></div></div>
+      <section className="section container" id="conversations"><div className="section-heading"><div><span className="eyebrow">01 / A SEAT AT THE TABLE</span><h2>Different minds.<br/><span>Extraordinary conversations.</span></h2></div><p>Big ideas begin with an open mind.<br/>Discover a perspective beyond your own.</p></div><div className="guest-stage"><div className="stage-label"><span className="gold-dot"/> FIGURING OUT WITH RAJ SHAMANI</div><Image src="/images/conversations.webp" alt="A lineup of guests featured on Figuring Out, with Raj Shamani" width={1600} height={700} sizes="(max-width: 700px) 100vw, 90vw"/><span className="stage-caption">GOOD QUESTIONS. NO SHORTCUTS.</span></div><Conversations/></section>
+      <section className="quote-section container"><span className="quote-mark" aria-hidden="true">“</span><p>You don’t need to have it all figured out.<br/>You just need to <em>stay curious.</em></p><span className="eyebrow">THE SPIRIT BEHIND THIS TRIBUTE</span></section>
+      <section className="section story-section" id="journey"><div className="container"><div className="section-heading"><div><span className="eyebrow">02 / MORE THAN A MICROPHONE</span><h2>Every chapter<br/><span>starts with a question.</span></h2></div><span className="section-aside">THE JOURNEY IS THE STORY ↙</span></div><Journey/><div className="family-row"><div className="family-image"><Image src="/images/family.jpg" alt="Raj Shamani with family, from the reference tribute" width={1000} height={700} sizes="(max-width: 700px) 100vw, 45vw"/></div><div className="family-copy"><span className="eyebrow">THE PEOPLE BEHIND THE PERSON</span><h3>Rooted in family.<br/><span>Open to the world.</span></h3><p>Behind every public conversation is a personal story. Family, friendships, and the people who show up along the way are part of this one, too.</p><a className="text-link" href="#mindset">What carries forward <span aria-hidden="true">↗</span></a></div></div></div></section>
+      <section className="section container" id="mindset"><div className="section-heading"><div><span className="eyebrow">03 / THE EVERYDAY PRACTICE</span><h2>A mindset.<br/><span>Not a finish line.</span></h2></div><p>A few ideas to take into<br/>your next conversation.</p></div><div className="principles">{[{n:"01", icon:"↗",title:"Choose curiosity",text:"Ask the follow-up. Look for the story behind the answer."},{n:"02",icon:"◎",title:"Listen to understand",text:"Make room for a perspective that challenges your own."},{n:"03",icon:"✳",title:"Build before you’re ready",text:"Start small. Let the work teach you what comes next."},{n:"04",icon:"↻",title:"Keep figuring it out",text:"Stay a student. There is always another question worth asking."}].map(item=><article key={item.n} className="principle"><div className="principle-top"><span aria-hidden="true">{item.icon}</span><span>{item.n}</span></div><h3>{item.title}</h3><p>{item.text}</p></article>)}</div></section>
+      <section className="explore-section container" id="explore"><span className="eyebrow">THERE’S ALWAYS MORE TO DISCOVER</span><h2>Your next perspective<br/>is <span>one conversation away.</span></h2><a className="button white" href="https://www.youtube.com/watch?v=xAt1xcC6qfM" target="_blank" rel="noopener noreferrer">Start with Bill Gates <span aria-hidden="true">↗</span></a><span className="explore-orbit" aria-hidden="true"/></section>
+    </main><footer className="container footer"><div className="footer-top"><a className="wordmark" href="#">raj shamani<span>®</span></a><a className="text-link" href="#main">Back to top ↑</a></div><div className="footer-bottom"><p>An independent fan-made tribute. Not affiliated with or endorsed by Raj Shamani.<br/>Images and featured links are adapted from the reference website. All rights belong to their respective owners.</p><a href="https://www.rajshamani.org/" target="_blank" rel="noopener noreferrer">Design reference ↗</a></div></footer>
+  </>;
+}
