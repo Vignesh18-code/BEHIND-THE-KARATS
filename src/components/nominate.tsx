@@ -3,7 +3,20 @@
 import { useState } from "react";
 import { Reveal } from "./reveal";
 import { IconArrowRight, IconCheck } from "./icons";
-import { NOMINATE_BENEFITS } from "@/lib/site-content";
+import { NOMINATE_BENEFITS, SOCIAL } from "@/lib/site-content";
+
+/**
+ * Where submissions go. The site is a static export with no server of its own,
+ * so the form posts straight to a form service. Both Web3Forms and Formspree
+ * accept a plain FormData POST and answer with JSON, so either works: set the
+ * endpoint, and the key only if the service wants one.
+ *
+ * Set NEXT_PUBLIC_FORM_KEY in the Vercel project (Settings -> Environment
+ * Variables) and redeploy. Until it is set, the form tells people it could not
+ * send rather than pretending it did.
+ */
+const ENDPOINT = process.env.NEXT_PUBLIC_FORM_ENDPOINT || "https://api.web3forms.com/submit";
+const ACCESS_KEY = process.env.NEXT_PUBLIC_FORM_KEY || "";
 
 const FIELDS = [
   { name: "name", label: "Name", type: "text", placeholder: "Your full name", required: true, half: true },
@@ -14,11 +27,13 @@ const FIELDS = [
 
 export function Nominate() {
   const [errors, setErrors] = useState<Record<string, boolean>>({});
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "failed">("idle");
+  const sent = status === "sent";
 
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const data = new FormData(form);
     const next: Record<string, boolean> = {};
     for (const field of FIELDS) {
       const value = String(data.get(field.name) ?? "").trim();
@@ -31,7 +46,19 @@ export function Nominate() {
       document.querySelector<HTMLElement>('[aria-invalid="true"]')?.focus();
       return;
     }
-    setSent(true);
+
+    setStatus("sending");
+    if (ACCESS_KEY) data.append("access_key", ACCESS_KEY);
+    data.append("subject", "New nomination — Behind The Karats");
+    try {
+      const response = await fetch(ENDPOINT, { method: "POST", body: data, headers: { Accept: "application/json" } });
+      if (!response.ok) throw new Error(String(response.status));
+      form.reset();
+      setStatus("sent");
+    } catch {
+      // Never show a thank-you for something that did not arrive.
+      setStatus("failed");
+    }
   };
 
   return <section id="nominate" className="relative z-20 border-t border-white/5 section-space">
@@ -72,7 +99,7 @@ export function Nominate() {
               <p className="mt-3 max-w-sm text-sm leading-relaxed text-light-muted">
                 Your story is with the editorial desk. If it&rsquo;s a fit for the show, the team will reach out personally.
               </p>
-              <button type="button" onClick={() => setSent(false)} className="mt-8 text-[11px] font-semibold uppercase tracking-widest text-gold hover:text-gold-light">
+              <button type="button" onClick={() => setStatus("idle")} className="mt-8 text-[11px] font-semibold uppercase tracking-widest text-gold hover:text-gold-light">
                 Submit another story
               </button>
             </div> : <>
@@ -99,10 +126,20 @@ export function Nominate() {
                   <input id="social" name="social" type="url" className="form-input" placeholder="Drop your profile link" />
                 </div>
                 {Object.keys(errors).length > 0 && <p role="alert" className="text-xs text-red-400">Please complete the highlighted fields.</p>}
-                <button type="submit"
-                  className="group flex w-full items-center justify-center gap-3 rounded-full bg-gradient-to-r from-gold-light via-gold to-gold-dark px-4 py-4 text-xs font-bold uppercase tracking-[0.25em] text-black shadow-[0_0_30px_rgba(212,175,55,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_45px_rgba(212,175,55,0.55)]">
-                  Share My Story <IconArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" />
+                {/* Bots fill every field they find; people never see this one. */}
+                <input type="checkbox" name="botcheck" tabIndex={-1} autoComplete="off" aria-hidden="true"
+                  className="pointer-events-none absolute left-[-9999px] h-0 w-0 opacity-0" />
+
+                <button type="submit" disabled={status === "sending"}
+                  className="group flex w-full items-center justify-center gap-3 rounded-full bg-gradient-to-r from-gold-light via-gold to-gold-dark px-4 py-4 text-xs font-bold uppercase tracking-[0.25em] text-black shadow-[0_0_30px_rgba(212,175,55,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_45px_rgba(212,175,55,0.55)] disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0">
+                  {status === "sending" ? "Sending…" : <>Share My Story <IconArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-1" /></>}
                 </button>
+
+                {status === "failed" && <p role="alert" className="rounded-xl border border-red-400/30 bg-red-400/5 px-4 py-3 text-center text-xs leading-relaxed text-red-200">
+                  We couldn&rsquo;t send that just now. Please try again in a moment — or reach us on{" "}
+                  <a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-white">Instagram</a>{" "}
+                  and we&rsquo;ll pick it up from there.
+                </p>}
               </form>
             </>}
           </div>
