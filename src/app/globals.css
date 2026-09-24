@@ -235,7 +235,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 /* Only the people with an episode are links, so only those get the pointer. */
 .wave-zone { position: absolute; inset: 0; display: block; pointer-events: auto; cursor: default; }
 a.wave-zone { cursor: pointer; }
-.wave-person:hover .wave-hi, .wave-person:focus-within .wave-hi { opacity: 1; }
+/* Hover reveals the wave. Focus only counts when it came from the keyboard: clicking a
+   guest opens YouTube in a new tab and leaves the link focused here, which used to pin
+   that person's card open on the page behind it. Kept as two rules so a browser without
+   :has() still gets the hover. */
+.wave-person:hover .wave-hi { opacity: 1; }
+.wave-person:has(:focus-visible) .wave-hi { opacity: 1; }
 
 .wave-card { position: absolute; top: 57%; z-index: 5; width: max-content; max-width: min(34vw, 240px);
   translate: -50% 10px; padding: 11px 15px; border-radius: 13px; border: 1px solid rgb(212 175 55 / .3);
@@ -244,7 +249,8 @@ a.wave-zone { cursor: pointer; }
 .wave-card strong { display: block; font-family: var(--font-cinzel); font-size: 14px; font-weight: 700; color: #fff; }
 .wave-card span { display: block; margin-top: 3px; font-size: 11px; line-height: 1.35; color: #a9a9b6; }
 .wave-card em { display: block; margin-top: 7px; font-size: 9px; font-style: normal; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--color-gold); }
-.wave-person:hover .wave-card, .wave-person:focus-within .wave-card { opacity: 1; translate: -50% 0; }
+.wave-person:hover .wave-card { opacity: 1; translate: -50% 0; }
+.wave-person:has(:focus-visible) .wave-card { opacity: 1; translate: -50% 0; }
 
 /* Keep the complete line-up in view, with the photo and wave layers scaling together. */
 .wave-note-touch { display: none; }
@@ -405,8 +411,8 @@ a.wave-zone { cursor: pointer; }
 .wave-card { overflow-wrap: anywhere; }
 .wave-person:first-of-type .wave-card { left: 8px !important; translate: 0 10px; }
 .wave-person:last-child .wave-card { left: auto !important; right: 8px; translate: 0 10px; }
-.wave-person:first-of-type:is(:hover, :focus-within) .wave-card,
-.wave-person:last-child:is(:hover, :focus-within) .wave-card { translate: 0 0; }
+.wave-person:first-of-type:is(:hover, :has(:focus-visible)) .wave-card,
+.wave-person:last-child:is(:hover, :has(:focus-visible)) .wave-card { translate: 0 0; }
 
 @media (max-width: 767px) {
   #group { padding-block: var(--section-space); }
