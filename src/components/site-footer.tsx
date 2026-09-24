@@ -26,7 +26,7 @@ export function SiteFooter() {
       <span className="mt-1 block sm:ml-2 sm:mt-0 sm:inline">
         Designed by{" "}
         <a href="https://theelitedesigns.in" target="_blank" rel="noopener noreferrer"
-          className="text-gold-muted underline-offset-4 transition-colors hover:text-gold hover:underline">
+          className="-my-2 inline-block px-1 py-2 text-gold-muted underline-offset-4 transition-colors hover:text-gold hover:underline">
           EliteDesigns
         </a>
       </span>

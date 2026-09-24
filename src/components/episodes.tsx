@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { Reveal } from "./reveal";
 import { IconClose, IconPlay } from "./icons";
 import { SHORTS } from "@/lib/site-content";
@@ -39,6 +40,11 @@ export function Episodes() {
     };
   }, [open]);
 
+  // The player is portalled to the body. Every section on the page sets
+  // `relative z-20`, which makes each one its own stacking context, so an
+  // overlay rendered inside this section can never rise above the sections
+  // that follow it however high its z-index goes — on a phone the nominate
+  // copy drew straight over the video.
   return <section id="episodes" className="relative z-20 border-t border-white/5 section-space">
     <div className="site-container">
       {/* Headline and standfirst sit on one line, aligned along their baseline,
@@ -78,7 +84,7 @@ export function Episodes() {
       </div>
     </div>
 
-    {open && <div data-lenis-prevent className="shorts-overlay fixed inset-0 z-[60] flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
+    {open && createPortal(<div data-lenis-prevent className="shorts-overlay fixed inset-0 z-[100] flex items-center justify-center bg-black/85 p-4 backdrop-blur-sm"
       onClick={event => { if (event.target === event.currentTarget) setOpen(null); }}>
       <div ref={dialog} role="dialog" aria-modal="true" aria-label="Shorts player" tabIndex={-1}
         className="shorts-dialog w-full max-w-[420px] overflow-hidden rounded-2xl border border-gold/25 bg-noir-card shadow-2xl outline-none">
@@ -92,6 +98,6 @@ export function Episodes() {
           src={`https://www.youtube-nocookie.com/embed/${open}?autoplay=1&rel=0&playsinline=1`}
           title="Behind The Karats short" allow="autoplay; encrypted-media; picture-in-picture; web-share" allowFullScreen />
       </div>
-    </div>}
+    </div>, document.body)}
   </section>;
 }
