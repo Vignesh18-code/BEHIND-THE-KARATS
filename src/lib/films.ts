@@ -22,19 +22,19 @@ export type Film = {
 
 export const films: Film[] = [
   { video: '/media/5.mp4', href: 'https://youtu.be/AkApe4MIjHg',
-    episode: 'EP 1', guest: 'Shri. Nandakumar',
+    episode: 'EP 1', guest: 'Shri Nandakumar',
     title: 'Jewellers, Tax & Truth', subtitle: 'An IRS Officer Speaks' },
   { video: '/media/3.mp4', href: 'https://youtu.be/yvVcvfZDlMo',
     episode: 'EP 2', guest: 'SS Alam',
     title: 'AI & Hyper Local Sourcing', subtitle: 'Redefining the Fine Jewellery Market' },
   { video: '/media/1.mp4', href: 'https://youtu.be/d5rM51Gaek4',
-    episode: 'EP 4', guest: 'Srinivasan',
+    episode: 'EP 4', guest: 'Mr. K. Srinivasan',
     title: 'From ₹100 to Jewellery Empire', subtitle: 'AI, Innovation & Future' },
   { video: '/media/2.mp4', href: 'https://youtu.be/DPnfNZ1utSo',
-    episode: 'EP 5', guest: 'K. Karthik',
+    episode: 'EP 5', guest: 'Mr. Karthik Surabi',
     title: 'From Jewellery Roots to Bullion Pioneer', subtitle: 'On Silver & Growth' },
   // Unnumbered, so it brings up the rear rather than interrupting the run.
   { video: '/media/4.mp4', href: 'https://youtu.be/GiM-vxTt48Y',
-    episode: 'Trailer', guest: 'Nithin',
+    episode: 'Trailer', guest: 'Mr. Nithin',
     title: 'Market Truth: The Rise of Silver', subtitle: "Gen Z's Future Industry" },
 ];
