@@ -1,11 +1,11 @@
-import { GoldPlayButton3D } from "./gold-play-button-3d";
+import { GoldPlayButtonLazy } from "./gold-play-button-lazy";
 import { Reveal } from "./reveal";
 import { IconInstagram, IconSpin, IconYouTube } from "./icons";
 import { SOCIAL } from "@/lib/site-content";
 
 export function KaratsHero() {
   return <section id="hero" className="section-space relative flex min-h-[74svh] items-center justify-center overflow-hidden">
-    <GoldPlayButton3D />
+    <GoldPlayButtonLazy />
 
     <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-noir via-noir/55 to-noir/80" />
     <div className="pointer-events-none absolute inset-0 z-10 bg-[radial-gradient(circle_at_center,rgba(212,175,55,0.06)_0%,transparent_70%)]" />
