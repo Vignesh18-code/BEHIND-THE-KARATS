@@ -62,12 +62,12 @@ export type GroupPerson = { name: string; role: string; href?: string };
  */
 export const GROUP_PEOPLE: GroupPerson[] = [
   { name: "Mr. Agar Chand", role: "Founder, Sri Jain Jewellery Private Limited" },
-  { name: "SS Alam", role: "Founder, Aurum Jewels Ltd" },
-  { name: "Mr. Karthik Surabi", role: "Founder, Surabi Bullion" },
-  { name: "Vikas Singhvi", role: "Joint Managing Director, SR Scales , Host - Bwhind the Karats" },
-  { name: "Mr. Nithin", role: "CEO, Sukra Jewellery" },
-  { name: "Mr. K. Srinivasan", role: "Founder, Emerald Jewel Industry India Limited" },
-  { name: "Shri Nandakumar", role: "IRS" },
+  { name: "SS Alam", role: "Founder, Aurum Jewels Ltd", href: "https://youtu.be/yvVcvfZDlMo" },
+  { name: "Mr. Karthik Surabi", role: "Founder, Surabi Bullion", href: "https://youtu.be/DPnfNZ1utSo" },
+  { name: "Vikas Singhvi", role: "Joint Managing Director, SR Scales Host - Behind the Karats" },
+  { name: "Mr. Nithin", role: "CEO, Sukra Jewellery", href: "https://youtu.be/GiM-vxTt48Y" },
+  { name: "Mr. K. Srinivasan", role: "Founder, Emerald Jewel Industry India Limited", href: "https://youtu.be/d5rM51Gaek4" },
+  { name: "Shri Nandakumar", role: "IRS", href: "https://youtu.be/AkApe4MIjHg" },
 ];
 
 /**

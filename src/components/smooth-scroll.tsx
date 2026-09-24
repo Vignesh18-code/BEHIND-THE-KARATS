@@ -4,18 +4,19 @@ import { useEffect } from "react";
 import Lenis from "lenis";
 
 /**
- * Inertial smooth scrolling. Disabled entirely under prefers-reduced-motion,
- * where globals.css restores native `scroll-behavior: smooth` instead.
+ * Ease desktop wheel input; leave touch momentum and reduced-motion scrolling
+ * to the browser so swipes remain directly attached to the user’s gesture.
  */
 export function SmoothScroll() {
   useEffect(() => {
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const touch = window.matchMedia("(pointer: coarse)");
     let lenis: Lenis | null = null;
     let frame = 0;
 
     const start = () => {
-      if (lenis || motion.matches) return;
-      lenis = new Lenis({ duration: 1.1, wheelMultiplier: 0.9, touchMultiplier: 1.6 });
+      if (lenis || motion.matches || touch.matches) return;
+      lenis = new Lenis({ duration: 0.75, wheelMultiplier: 1, syncTouch: false });
       const raf = (time: number) => { lenis?.raf(time); frame = requestAnimationFrame(raf); };
       frame = requestAnimationFrame(raf);
     };
@@ -40,11 +41,12 @@ export function SmoothScroll() {
       history.replaceState(null, "", id);
     };
 
-    const sync = () => { if (motion.matches) stop(); else start(); };
+    const sync = () => { if (motion.matches || touch.matches) stop(); else start(); };
     sync();
     motion.addEventListener("change", sync);
+    touch.addEventListener("change", sync);
     document.addEventListener("click", onClick);
-    return () => { motion.removeEventListener("change", sync); document.removeEventListener("click", onClick); stop(); };
+    return () => { touch.removeEventListener("change", sync); motion.removeEventListener("change", sync); document.removeEventListener("click", onClick); stop(); };
   }, []);
 
   return null;

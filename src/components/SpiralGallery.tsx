@@ -41,13 +41,21 @@ export default function SpiralGallery() {
     const sizeObserver = new ResizeObserver(resize);
     const stage = runway.current?.querySelector('.stage');
     if (stage) sizeObserver.observe(stage);
+    let wasOnscreen = false;
     const render = () => {
       frame = requestAnimationFrame(render);
       const rect = runway.current?.getBoundingClientRect();
       if (!rect) return;
+      const onscreen = rect.top < height && rect.bottom > 0 && !document.hidden;
+      // Avoid projecting and writing every card while another section is visible.
+      if (!onscreen) {
+        if (wasOnscreen) videos.current.forEach(video => video?.pause());
+        wasOnscreen = false;
+        return;
+      }
+      wasOnscreen = true;
       const scrolled = clamp(-rect.top / distance);
       const { progress, camera } = timelineAt(scrolled);
-      const onscreen = rect.top < height && rect.bottom > 0;
       const story = storyPhase(scrolled);
       if (opening.current) opening.current.style.opacity = String(story.opening);
       if (heading.current) heading.current.style.opacity = String(story.category);

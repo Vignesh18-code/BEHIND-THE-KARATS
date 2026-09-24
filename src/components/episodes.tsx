@@ -71,7 +71,7 @@ export function Episodes() {
 
     {/* The reel runs on its own; the track holds the list twice so the loop
         never shows a seam, and only the first copy is reachable. */}
-    <div className="reel mt-9" aria-label="Shorts reel" data-lenis-prevent>
+    <div className="reel mt-9" aria-label="Shorts reel" data-lenis-prevent-horizontal>
       <div className="reel-track">
         {[0, 1].map(copy => <div key={copy} className="reel-run" aria-hidden={copy === 1 || undefined}>
           {SHORTS.map(id => <button key={`${copy}-${id}`} type="button" className="reel-card"

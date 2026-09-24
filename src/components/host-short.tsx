@@ -41,7 +41,8 @@ export function HostShort() {
 
   return <div ref={ref} className="aspect-[9/16] w-full max-w-[340px] overflow-hidden rounded-2xl bg-black">
     {mount && <iframe
-      className="block h-full w-full rounded-2xl"
+      className={`block h-full w-full rounded-2xl${reduced ? "" : " pointer-events-none"}`}
+      tabIndex={reduced ? 0 : -1}
       src={`https://www.youtube.com/embed/${SHORT_ID}?${params}`}
       title="Redefining the Jewellery Industry ft. Vikas Singhvi"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
