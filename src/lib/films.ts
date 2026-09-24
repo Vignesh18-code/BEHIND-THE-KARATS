@@ -25,7 +25,7 @@ export const films: Film[] = [
     episode: 'EP 1', guest: 'Shri Nandakumar',
     title: 'Jewellers, Tax & Truth', subtitle: 'An IRS Officer Speaks' },
   { video: '/media/3.mp4', href: 'https://youtu.be/yvVcvfZDlMo',
-    episode: 'EP 2', guest: 'SS Alam',
+    episode: 'EP 2', guest: 'Mr. SS Alam',
     title: 'AI & Hyper Local Sourcing', subtitle: 'Redefining the Fine Jewellery Market' },
   { video: '/media/1.mp4', href: 'https://youtu.be/d5rM51Gaek4',
     episode: 'EP 4', guest: 'Mr. K. Srinivasan',

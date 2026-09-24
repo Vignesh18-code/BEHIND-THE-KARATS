@@ -24,7 +24,7 @@ export function SiteFooter() {
     <p className="mt-10 border-t border-white/5 px-5 pt-6 text-center text-[11px] tracking-wider">
       © {new Date().getFullYear()} Behind the Karats. All rights reserved.
       <span className="mt-1 block sm:ml-2 sm:mt-0 sm:inline">
-        Designed by{" "}
+        Designed & Developed by{" "}
         <a href="https://theelitedesigns.in" target="_blank" rel="noopener noreferrer"
           className="-my-2 inline-block px-1 py-2 text-gold-muted underline-offset-4 transition-colors hover:text-gold hover:underline">
           EliteDesigns
