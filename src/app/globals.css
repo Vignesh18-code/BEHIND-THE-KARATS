@@ -1,25 +1,444 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
 
-:root{--bg:#080808;--panel:#111110;--gold:#d8b068;--muted:#a5a5a2;--line:#ffffff20;--font-body:Inter,Arial,sans-serif;--font-display:Outfit,Arial,sans-serif;color-scheme:dark}
-*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:35px}body{margin:0;background:var(--bg);color:#f3f2ee;font-family:var(--font-body);font-size:16px;line-height:1.6}a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;cursor:pointer}button,a{-webkit-tap-highlight-color:transparent}a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--gold);outline-offset:6px}a,button{transition:color .2s,background .2s,transform .2s}a:hover{color:var(--gold)}button:hover{background:#d8b06822}::selection{background:var(--gold);color:#080808}.container{width:min(1280px,calc(100% - 112px));margin-inline:auto}.skip-link{position:fixed;top:-100px;left:20px;background:var(--gold);color:#000;padding:12px;z-index:100}.skip-link:focus{top:12px}.header{height:104px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:5;border-bottom:1px solid var(--line)}.wordmark{font:600 27px var(--font-display);letter-spacing:-1.3px}.wordmark span{font:12px var(--font-body);color:var(--gold);vertical-align:top;margin-left:5px}.header nav{display:flex;gap:34px;font-size:14px;color:#c3c3be}.header-cta{font-size:14px;border:1px solid #ffffff40;padding:10px 19px;border-radius:24px;display:flex;gap:26px}.hero{min-height:740px;position:relative;isolation:isolate;overflow:hidden;margin-top:-104px;padding-top:104px}.hero-content{padding-top:103px;position:relative;z-index:2;pointer-events:none}.hero-content a{pointer-events:auto}.eyebrow{font-size:12px;letter-spacing:2.5px;font-weight:500;color:var(--gold);display:inline-flex;align-items:center;gap:10px}.gold-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 14px #d8b06899}.hero h1{font-family:var(--font-display);font-weight:500;letter-spacing:-6px;line-height:.97;font-size:clamp(72px,8.7vw,124px);margin:26px 0}.hero h1>span:not(.period){color:var(--gold)}.period{color:var(--gold)}.hero p{color:#b5b5b1;line-height:1.75;margin:28px 0;font-size:16px}.button{display:inline-flex;align-items:center;justify-content:center;gap:25px;padding:15px 24px;font-size:14px;font-weight:600;border-radius:4px}.button:hover{transform:translateY(-2px)}.gold{color:#17130c;background:var(--gold)}.gold:hover{background:#edc988;color:#17130c}.white{background:#f2f0e8;color:#111}.white:hover{background:var(--gold);color:#111}.play{font-size:12px}.hero-note{font-size:10px;letter-spacing:1.8px;color:#9c9c98;display:flex;gap:12px;align-items:center;margin-top:38px}.tiny-line{width:27px;height:1px;background:var(--gold)}.hero-portrait{position:absolute;right:0;bottom:0;height:89%;width:57%;object-fit:contain;object-position:bottom right;filter:grayscale(1);z-index:-1;opacity:.86;mask-image:linear-gradient(to right,transparent,#000 25%),linear-gradient(to bottom,#000 78%,transparent);mask-composite:intersect}.hero-mic{position:absolute;width:410px;height:auto;right:28%;bottom:34px;z-index:0;filter:grayscale(1);opacity:.5;pointer-events:none;mask-image:linear-gradient(to top,transparent,#000 25%)}.hero-grid{position:absolute;inset:0;background-image:linear-gradient(#d8b06809 1px,transparent 1px),linear-gradient(90deg,#d8b06809 1px,transparent 1px);background-size:110px 110px;z-index:-2;mask-image:linear-gradient(90deg,transparent,#000)}.hero-bottom{display:flex;justify-content:space-between;font-size:10px;letter-spacing:1.8px;color:#a2a29a;margin-top:64px;padding-block:22px;border-top:1px solid var(--line);position:relative;z-index:2}.hero-bottom a{display:flex;gap:20px}.ticker{border-block:1px solid var(--line);overflow:hidden;background:#12110e}.ticker>div{display:flex;justify-content:center;align-items:center;gap:36px;white-space:nowrap;padding:20px 24px;font-size:12px;letter-spacing:2.8px;color:#cac6ba}.ticker span{color:var(--gold);font-size:22px}.section{padding-block:108px}.section-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:35px;margin-bottom:48px}h2{font:500 clamp(36px,4vw,55px)/1.12 var(--font-display);letter-spacing:-1.8px;margin:17px 0 0}h2 span,h3 span{color:#9b9b94}.section-heading p{font-size:14px;color:var(--muted);margin:0 0 5px}.guest-stage{background:radial-gradient(ellipse at 50% 100%,#38302355,transparent 65%),#101010;min-height:280px;position:relative;overflow:hidden;border:1px solid var(--line);border-bottom:none;border-radius:8px 8px 0 0;padding-top:65px}.guest-stage img{width:100%;height:auto;display:block;filter:grayscale(1);max-height:410px;object-fit:contain;object-position:bottom}.stage-label{position:absolute;left:26px;top:21px;display:flex;align-items:center;gap:10px;font-size:10px;letter-spacing:1.8px;color:#c2bba9}.stage-caption{position:absolute;right:25px;top:24px;font-size:9px;letter-spacing:2px;color:#909089}.episode-panel{display:flex;align-items:center;gap:32px;border:1px solid var(--line);padding:28px 32px;border-radius:0 0 8px 8px;background:#111110}.episode-info{flex:1}.episode-info .eyebrow{font-size:10px;letter-spacing:1.7px}.episode-info h3{font:500 27px var(--font-display);margin:7px 0 2px}.episode-info p{font-size:13px;color:var(--muted);margin:0}.text-link{font-size:13px;display:inline-flex;gap:30px;align-items:center}.carousel-controls{display:flex;align-items:center;gap:10px}.carousel-controls button{width:42px;height:42px;border:1px solid #ffffff30;border-radius:50%;background:transparent;font-size:18px}.carousel-controls button:hover{background:#d8b06833}.counter{font-size:12px;margin-right:12px;color:var(--gold)}.counter span{color:#8c8c83;margin-left:6px}.quote-section{text-align:center;padding:10px 0 98px}.quote-mark{font:80px Georgia,serif;line-height:1;color:var(--gold)}.quote-section p{font:400 32px/1.5 var(--font-display);letter-spacing:-.5px;margin:0 0 24px}.quote-section em{font-style:normal;color:var(--gold)}.quote-section .eyebrow{font-size:10px;color:#9b9b94}.story-section{background:#0e0e0d;border-block:1px solid var(--line)}.section-aside{font-size:10px;letter-spacing:1.8px;color:#9b9b94}.journey-layout{display:grid;grid-template-columns:1fr 2.2fr;gap:45px}.chapter-tabs{display:flex;flex-direction:column}.chapter-tabs button{display:flex;align-items:center;gap:20px;text-align:left;font-size:11px;letter-spacing:1.4px;padding:25px 0;background:transparent;border:0;border-bottom:1px solid var(--line);color:#92928c}.chapter-tabs button span:first-child{font-size:13px;letter-spacing:0}.chapter-tabs button span:last-child{margin-left:auto}.chapter-tabs button[aria-selected=true]{color:var(--gold);border-bottom-color:var(--gold)}.chapter-content{padding:42px;background:linear-gradient(110deg,#1e1c17,#131312);border:1px solid #d8b06830;border-radius:6px;position:relative;overflow:hidden;min-height:345px}.chapter-content h3{white-space:pre-line;font:500 37px/1.15 var(--font-display);letter-spacing:-1px;margin:20px 0}.chapter-content p{color:#b3b0a8;font-size:14px;max-width:460px;position:relative;z-index:1}.chapter-tag{display:inline-block;font-size:10px;letter-spacing:1px;border:1px solid #d8b06855;border-radius:20px;padding:5px 13px;color:var(--gold);margin-top:12px}.chapter-watermark{position:absolute;right:10px;bottom:-64px;font:600 230px var(--font-display);color:#d8b06807;pointer-events:none}.family-row{display:grid;grid-template-columns:1fr 1fr;gap:65px;align-items:center;margin-top:92px}.family-image{overflow:hidden;border-radius:5px;height:330px}.family-image img{width:100%;height:100%;object-fit:cover;filter:grayscale(1);opacity:.8}.family-copy h3{font:500 36px/1.2 var(--font-display);letter-spacing:-1px;margin:18px 0}.family-copy p{font-size:15px;color:var(--muted);margin:22px 0 30px;max-width:430px}.principles{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.principle{background:#111110;border:1px solid var(--line);border-radius:6px;padding:27px 25px}.principle-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:36px}.principle-top span:first-child{font-size:29px;color:var(--gold)}.principle-top span:last-child{font-size:11px;color:#85857d}.principle h3{font:500 21px/1.3 var(--font-display);margin:0 0 12px}.principle p{font-size:14px;color:var(--muted);margin:0}.explore-section{text-align:center;position:relative;overflow:hidden;border:1px solid #d8b06845;background:radial-gradient(ellipse at bottom,#d8b06816,transparent 70%),#111110;border-radius:8px;padding:78px 24px;margin-bottom:90px}.explore-section h2{margin-bottom:32px}.explore-section h2 span{color:var(--gold)}.explore-section>*:not(.explore-orbit){position:relative;z-index:1}.explore-orbit{width:660px;height:660px;border:1px solid #d8b06812;border-radius:50%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}.footer{padding-bottom:35px}.footer-top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:32px}.footer-bottom{display:flex;justify-content:space-between;align-items:center;gap:35px;padding-top:20px;color:#95958f;font-size:12px}.footer-bottom p{margin:0;line-height:1.8}.footer-bottom a{white-space:nowrap}.not-found{padding-block:120px}.not-found h1{font:500 64px/1.1 var(--font-display)}.not-found p{color:var(--muted);margin-bottom:30px}
-@media(min-width:1600px){.hero-portrait{right:calc((100vw - 1440px)/2)}}
-@media(max-width:1000px){.container{width:calc(100% - 64px)}.header nav{gap:18px}.hero h1{font-size:92px}.hero-portrait{width:66%;right:-10%;opacity:.65}.hero-mic{right:17%;width:330px}.principles{grid-template-columns:repeat(2,1fr)}.episode-panel{flex-wrap:wrap}.episode-info{flex-basis:50%}.carousel-controls{margin-left:auto}.journey-layout{gap:25px;grid-template-columns:1fr 2fr}.family-row{gap:35px}.family-copy h3{font-size:30px}}
-@media(max-width:700px){.container{width:calc(100% - 40px)}.header{height:80px}.wordmark{font-size:23px}.header nav{display:none}.header-cta{font-size:12px;padding:8px 13px;gap:15px}.hero{margin-top:-80px;padding-top:80px;min-height:770px}.hero-content{padding-top:75px}.hero .eyebrow{font-size:9px;letter-spacing:1.5px}.hero h1{font-size:clamp(62px,15.8vw,104px);letter-spacing:-3px;position:relative;z-index:2;margin-top:26px}.hero-portrait{width:110%;height:75%;right:-33%;opacity:.5;mask-image:linear-gradient(to right,transparent,#000 36%),linear-gradient(to bottom,#000 45%,transparent 94%);mask-composite:intersect}.hero-mic{width:260px;right:-35px;bottom:95px;opacity:.25}.hero p{font-size:14px;margin-top:28px;max-width:310px}.hero .button{gap:14px;font-size:12px;padding:14px 18px}.hero-note{font-size:8px;letter-spacing:1px;margin-top:33px}.hero-bottom{margin-top:83px;font-size:8px;gap:10px}.hero-bottom>span:last-child{display:none}.hero-bottom a{gap:10px}.ticker>div{justify-content:flex-start;font-size:10px;padding-block:15px;gap:24px}.section{padding-block:65px}.section-heading{display:block;margin-bottom:30px}.section-heading p{margin-top:20px}.section-heading .eyebrow,.eyebrow{font-size:10px;letter-spacing:1.6px}h2{font-size:36px;letter-spacing:-1.2px}.guest-stage{min-height:205px;padding-top:75px}.guest-stage img{width:150%;max-width:none;margin-left:-25%;height:180px;object-fit:contain}.stage-label{font-size:8px;left:17px;letter-spacing:1.4px}.stage-caption{display:none}.episode-panel{padding:21px;gap:22px}.episode-info{flex-basis:100%}.episode-info h3{font-size:25px}.episode-panel>.text-link{font-size:11px;gap:12px}.carousel-controls{gap:6px}.carousel-controls button{width:34px;height:34px}.counter{display:none}.quote-section{padding:0 0 65px}.quote-section p{font-size:24px}.quote-mark{font-size:64px}.quote-section .eyebrow{font-size:8px;letter-spacing:1.2px}.section-aside{display:none}.journey-layout{grid-template-columns:1fr;gap:25px}.chapter-tabs{flex-direction:row;gap:15px}.chapter-tabs button{font-size:8px;gap:7px;flex:1;padding:16px 0;letter-spacing:.5px}.chapter-tabs button span:last-child{display:none}.chapter-content{padding:28px;min-height:345px}.chapter-content h3{font-size:33px}.chapter-content p{font-size:14px}.family-row{grid-template-columns:1fr;gap:28px;margin-top:55px}.family-image{height:260px}.family-copy h3{font-size:32px}.principles{gap:12px}.principle{padding:21px 17px}.principle h3{font-size:20px}.principle p{font-size:14px}.principle-top{margin-bottom:25px}.explore-section{padding:55px 20px;margin-bottom:60px}.explore-section h2{font-size:33px}.explore-section .eyebrow{font-size:8px;letter-spacing:1.4px}.footer-bottom{display:block;font-size:12px}.footer-bottom a{display:inline-block;margin-top:16px}.footer-top{padding-bottom:24px}.not-found h1{font-size:48px}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
+/* The site is always dark, but the vendored iPhone component keys its titanium
+   finish off `dark:` (i.e. the viewer's OS theme), which flipped the frame from
+   cream to bronze. Scope the variant to a `.dark` class we never set so the
+   frame stays on its light finish for everyone. */
+@custom-variant dark (&:where(.dark, .dark *));
 
-/* Homepage composition matched to the supplied 3420 × 1946 reference. */
-.reference-hero{height:max(100svh,56.9vw);position:relative;overflow:hidden;isolation:isolate;background:#080808;border-top:1px solid #363636}
-.reference-stars{position:absolute;inset:0;z-index:-1;pointer-events:none}.reference-stars i{position:absolute;width:1px;height:1px;background:#b1b6bb;border-radius:50%}
-.reference-copy{position:relative;z-index:3;text-align:center;padding-top:7.9vw;margin:auto;width:65vw}
-.reference-eyebrow{margin:0;color:#d5ad60;font-size:.83vw;font-weight:700;letter-spacing:.17vw;line-height:1.6}
-.reference-copy h1{font-family:var(--font-display);font-size:5.55vw;font-weight:900;letter-spacing:-.33vw;line-height:1.12;margin:1.65vw -3vw 0;color:#fff}
-.reference-copy h1 span{background:linear-gradient(105deg,#d5ad60 0%,#ead6ae 30%,#fff 49%,#cbd0d8 100%);background-clip:text;-webkit-text-fill-color:transparent}
-.reference-description{font-size:1.17vw;line-height:1.65;color:#898f99;font-weight:400;margin:2.1vw -1vw 0}
-.reference-portrait{position:absolute;width:52.1vw;height:auto;max-width:none;left:68.7vw;top:-5.7vw;opacity:.45;pointer-events:none;mask-image:linear-gradient(#000 58%,transparent 88%);z-index:1}
-.reference-mic{position:absolute;width:38vw;height:auto;left:-10.2vw;top:9.05vw;filter:grayscale(1);pointer-events:none;z-index:2}
-.reference-community{position:absolute;left:24%;top:57.1%;width:52%;z-index:2;mask-image:linear-gradient(transparent,#000 14%)}
-.reference-community>img{display:block;width:100%;height:auto}
-.community-links{position:absolute;inset:20% 0 0;display:grid;grid-template-columns:repeat(8,1fr)}
-.community-links a{position:relative;min-width:0}.community-links a span{position:absolute;top:2%;left:50%;transform:translate(-50%,-100%);background:#151515;border:1px solid #d5ad6060;border-radius:4px;padding:6px 10px;font-size:14px;white-space:nowrap;opacity:0;transition:opacity .2s;color:#e3c48d}.community-links a:hover span,.community-links a:focus-visible span{opacity:1}
-.reference-wire{position:absolute;stroke:#b68c36;stroke-width:.7;opacity:.13;width:8.5vw;height:8.5vw;z-index:2;pointer-events:none}.wire-one{left:34%;top:34%}.wire-two{left:54.5%;top:23%;transform:rotate(12deg)}
-@media(max-width:700px){.reference-hero{height:100svh;min-height:680px}.reference-copy{padding-top:110px;width:94%}.reference-eyebrow{font-size:10px;letter-spacing:1.5px}.reference-copy h1{font-size:clamp(38px,8.4vw,59px);letter-spacing:-2px;line-height:1.13;margin:28px 0 0}.reference-description{font-size:14px;line-height:1.7;max-width:340px;margin:26px auto 0;padding-inline:12px}.desktop-break{display:none}.reference-portrait{width:105vw;left:62%;top:10px;opacity:.28}.reference-mic{width:65vw;left:-29vw;top:320px;opacity:.75}.reference-community{width:96%;left:2%;top:auto;bottom:-40vw}.reference-wire{width:90px;height:90px}.wire-one{top:42%;left:22%}.wire-two{top:21%;left:68%}}
+/* ========================================================================== */
+/* DESIGN TOKENS — Behind The Karats                                          */
+/* ========================================================================== */
+@theme {
+  --color-noir: #08080b;
+  --color-noir-dark: #040406;
+  --color-noir-card: #0f1016;
+  --color-noir-light: #151620;
+
+  --color-gold: #d4af37;
+  --color-gold-light: #f5e296;
+  --color-gold-dark: #997528;
+  --color-gold-muted: #968664;
+
+  --color-light: #f3f3f6;
+  --color-light-muted: #9c9ca8;
+
+  --font-cinzel: var(--font-cinzel-src), Georgia, serif;
+  --font-cormorant: var(--font-cormorant-src), Georgia, serif;
+  --font-sans: var(--font-jakarta-src), -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+:root {
+  --page-gutter: clamp(1.25rem, 4vw, 3rem);
+  --section-space: clamp(3.5rem, 7vw, 7rem);
+  --gold-glow: rgba(212, 175, 55, 0.25);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  color-scheme: dark;
+}
+
+html {
+  background-color: var(--color-noir);
+  color: var(--color-light);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Lenis drives scrolling; native smooth would fight it. Restored under
+   reduced-motion at the end of this file, where Lenis is disabled. */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background: radial-gradient(circle at 50% 0%, #17161f 0%, var(--color-noir) 75%);
+  font-family: var(--font-sans);
+}
+
+/* Shared edges and fluid spacing keep every section aligned at all sizes. */
+.site-container { width: 100%; max-width: 1280px; margin-inline: auto; padding-left: max(var(--page-gutter), env(safe-area-inset-left)); padding-right: max(var(--page-gutter), env(safe-area-inset-right)); }
+.section-space { padding-block: var(--section-space); }
+.site-container :where(.grid, .flex) > * { min-width: 0; }
+h1, h2, h3, h4 { text-wrap: balance; overflow-wrap: break-word; }
+input, textarea { min-width: 0; }
+
+::selection { background: var(--color-gold); color: #000; }
+
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; cursor: pointer; }
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, [tabindex]:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+}
+
+.skip-link { position: fixed; top: -100px; left: 20px; background: var(--color-gold); color: #000; padding: 12px; z-index: 100; }
+.skip-link:focus { top: 12px; }
+
+/* ========================================================================== */
+/* HERO BANNER (logo film + portrait + mic)                                   */
+/* ========================================================================== */
+.reference-hero { height: min(100svh, 56.9vw); min-height: 360px; position: relative; overflow: hidden; isolation: isolate; background: #080808; }
+.reference-stars { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+.reference-stars i { position: absolute; width: 1px; height: 1px; background: #b1b6bb; border-radius: 50%; }
+.reference-portrait { position: absolute; width: 20vw; height: auto; max-width: none; right: 0; top: 44%; bottom: auto; transform: translateY(-50%); opacity: 1; filter: grayscale(1); pointer-events: none; z-index: 2; --drift: 15px; animation: heroDrift 6s ease-in-out -6s infinite alternate; }
+.reference-mic { position: absolute; width: 38vw; height: auto; left: -13.5vw; top: 9.05vw; filter: grayscale(1); pointer-events: none; z-index: 2; --drift: 28px; animation: heroDrift 6s ease-in-out infinite alternate; }
+/* The two drift against each other: same 6s, but the portrait is a whole
+   duration behind, which on `alternate` puts it on the opposite leg — it sinks
+   as the mic rises. `translate` rather than `transform`, because the portrait
+   is centred with a `translateY(-50%)` this must not overwrite. */
+@keyframes heroDrift { from { translate: 0 calc(var(--drift) * -1); } to { translate: 0 var(--drift); } }
+.hero-logo { position: absolute; z-index: 0; inset: 0; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; line-height: 0; cursor: pointer; }
+.hero-logo video { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.hero-accessible-title { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+
+@media (max-width: 700px) {
+  .reference-hero { height: clamp(240px, 56.9vw, 400px); min-height: 0; }
+  .reference-portrait { width: 24vw; right: 0; top: 50%; bottom: auto; left: auto; transform: translateY(-50%); opacity: .75; --drift: 10px; }
+  .reference-mic { width: 44vw; left: -17vw; top: 50%; transform: translateY(-50%); opacity: .75; --drift: 18px; }
+  .hero-logo video { object-fit: contain; }
+}
+
+/* Glitz: the display face, used for the "Behind the Karats" title alone. The
+   family ships a single weight, so the heading sets `font-normal` — asking for
+   a bolder one only gets a synthesised smear. */
+@font-face { font-family: "Glitz"; src: url("/Glitz/glitz.otf") format("opentype"), url("/Glitz/glitz.ttf") format("truetype"); font-weight: 400; font-style: normal; font-display: swap; }
+.font-glitz { font-family: "Glitz", var(--font-cinzel); }
+
+/* ========================================================================== */
+/* TYPOGRAPHY & SURFACE TREATMENTS                                            */
+/* ========================================================================== */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #ffffff 0%, #fae69e 25%, #d4af37 60%, #aa802c 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.film-grain {
+  position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: .035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.ambient-orb { position: absolute; border-radius: 50%; filter: blur(120px); opacity: .4; animation: floatOrb 18s ease-in-out infinite alternate; }
+.ambient-orb-1 { width: 550px; height: 550px; background: radial-gradient(circle, rgba(212,175,55,.15) 0%, transparent 70%); top: -100px; left: 15%; }
+.ambient-orb-2 { width: 600px; height: 600px; background: radial-gradient(circle, rgba(160,110,30,.12) 0%, transparent 70%); top: 40%; right: -10%; animation-delay: -6s; }
+.ambient-orb-3 { width: 700px; height: 700px; background: radial-gradient(circle, rgba(212,175,55,.08) 0%, transparent 70%); bottom: 5%; left: 5%; animation-delay: -11s; }
+@keyframes floatOrb {
+  0% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-40px) translateX(25px) scale(1.08); }
+  100% { transform: translateY(20px) translateX(-20px) scale(.95); }
+}
+
+#cursor-glow { width: 320px; height: 320px; background: radial-gradient(circle, rgba(212,175,55,.07) 0%, transparent 70%); border-radius: 50%; transition: opacity .3s ease; will-change: transform; }
+#cursor-dot { width: 6px; height: 6px; background: var(--color-gold); border-radius: 50%; box-shadow: 0 0 10px var(--color-gold); will-change: transform; }
+@media (pointer: coarse) { #cursor-glow, #cursor-dot { display: none; } }
+
+/* ========================================================================== */
+/* COMPONENTS                                                                 */
+/* ========================================================================== */
+
+.card-3d { position: relative; transform-style: preserve-3d; transition: transform .4s cubic-bezier(.25,1,.5,1), box-shadow .4s ease, border-color .4s ease; will-change: transform; }
+.card-3d:hover { box-shadow: 0 20px 40px rgba(0,0,0,.7), 0 0 30px rgba(212,175,55,.15); }
+.card-glare { position: absolute; inset: 0; border-radius: inherit; background: radial-gradient(circle at var(--mouse-x,50%) var(--mouse-y,50%), rgba(255,255,255,.12) 0%, transparent 60%); opacity: 0; pointer-events: none; transition: opacity .3s ease; }
+.card-3d:hover .card-glare { opacity: 1; }
+
+.timeline-line { background: linear-gradient(180deg, rgba(212,175,55,.1) 0%, #d4af37 50%, rgba(212,175,55,.2) 100%); }
+
+.form-label { font-family: var(--font-cinzel); font-size: 11px; text-transform: uppercase; letter-spacing: .15em; color: #d1d1db; margin-bottom: 6px; font-weight: 600; }
+.form-input { width: 100%; padding: 13px 16px; border-radius: 12px; background: rgba(10,10,15,.7); border: 1px solid rgba(255,255,255,.12); color: #fff; font-size: 16px; font-family: var(--font-sans); transition: border-color .3s ease, box-shadow .3s ease, background .3s ease; outline: none; }
+.form-input:focus { border-color: var(--color-gold); background: rgba(16,17,25,.95); box-shadow: 0 0 15px rgba(212,175,55,.25); }
+.form-input::placeholder { color: #5d5d6c; font-size: 13px; }
+.form-input[aria-invalid="true"] { border-color: #f87171; }
+
+/* ========================================================================== */
+/* MOTION                                                                     */
+/* ========================================================================== */
+@keyframes spinSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.animate-spin-slow { animation: spinSlow 16s linear infinite; }
+
+@keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+.gold-shimmer { background-size: 200% auto; animation: shimmer 6s linear infinite; }
+
+.reveal-fade { opacity: 0; transform: translateY(24px); transition: opacity .7s cubic-bezier(.2,.8,.2,1), transform .7s cubic-bezier(.2,.8,.2,1); }
+.reveal-fade[data-visible="true"] { opacity: 1; transform: none; }
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #08080b; }
+::-webkit-scrollbar-thumb { background: #252431; border-radius: 4px; border: 1px solid rgba(212,175,55,.2); }
+::-webkit-scrollbar-thumb:hover { background: var(--color-gold-dark); }
+
+/* ========================================================================== */
+/* 404                                                                        */
+/* ========================================================================== */
+.not-found { max-width: 1280px; margin-inline: auto; padding: 120px 32px; }
+.not-found h1 { font: 400 64px/1.1 "Glitz", var(--font-cinzel); margin: 16px 0; }
+.not-found p { color: var(--color-light-muted); margin-bottom: 30px; }
+.not-found .eyebrow { font-size: 12px; letter-spacing: 2.5px; font-weight: 500; color: var(--color-gold); }
+.not-found .button { display: inline-flex; align-items: center; gap: 12px; padding: 15px 24px; font-size: 13px; font-weight: 600; border-radius: 999px; background: var(--color-gold); color: #17130c; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: smooth; }
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+  .reveal-fade { opacity: 1; transform: none; }
+  .ambient-orb { animation: none; }
+}
+
+
+
+#webgl-container { cursor: grab; }
+#webgl-container:active { cursor: grabbing; }
+
+/* The vendored iPhone svg hardcodes `max-h-[85vh]`, which clamps its height
+   while width stays fixed — squashing the frame out of aspect. Element
+   selector beats the utility's specificity. */
+.phone-frame > svg { max-height: none; }
+
+/* ── in-phone profile animations ───────────────────────────────────────────── */
+@keyframes phonePulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .45; transform: scale(.82); } }
+.phone-pulse { animation: phonePulse 1.8s ease-in-out infinite; }
+
+@keyframes kenBurns { 0% { transform: scale(1) translateY(0); } 100% { transform: scale(1.08) translateY(-1.5%); } }
+.phone-kenburns { animation: kenBurns 14s ease-in-out infinite alternate; }
+
+@media (prefers-reduced-motion: reduce) {
+  .phone-pulse, .phone-kenburns { animation: none; }
+}
+
+/* -------------------------------------------------------------------------- */
+/* GROUP PHOTO — HOVER TO WAVE                                                */
+/* Two photographs of one line-up, the second with everybody waving. The waving
+   one is stacked over the base seven times and each copy is clipped down to a
+   single person, so hovering a column fades in that one cut-out while the rest
+   of the frame keeps coming from the base photo. */
+.wave-group { margin: 0; overflow: hidden; border-radius: 20px; background: #050507;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 8%, #000 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 8%, #000 100%); }
+.wave-frame { position: relative; width: 100%; min-width: 0; }
+.wave-base { display: block; width: 100%; height: auto; }
+/* Each layer covers the whole frame, so the wrapper must let the pointer
+   through — only the clipped zone inside it is allowed to catch anything. */
+.wave-person { position: absolute; inset: 0; pointer-events: none; }
+/* The swap is instant on purpose. Fading between the two poses cross-dissolves
+   them, so for the length of the fade the raised arm is translucent and the
+   body shows through it — the person is briefly in both poses at once. A wipe
+   trades that for a hard edge with the same problem: clasped hands below the
+   line, a raised arm above it. Two fixed poses only ever read cleanly as a
+   cut, which is also how a wave actually looks. */
+.wave-hi { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; }
+.wave-zone { position: absolute; inset: 0; display: block; pointer-events: auto; cursor: pointer; }
+.wave-person:hover .wave-hi, .wave-person:focus-within .wave-hi { opacity: 1; }
+
+.wave-card { position: absolute; top: 57%; z-index: 5; width: max-content; max-width: min(34vw, 240px);
+  translate: -50% 10px; padding: 11px 15px; border-radius: 13px; border: 1px solid rgb(212 175 55 / .3);
+  background: rgb(8 8 11 / .84); text-align: center; opacity: 0; pointer-events: none;
+  transition: opacity .32s ease, translate .32s ease; }
+.wave-card strong { display: block; font-family: var(--font-cinzel); font-size: 14px; font-weight: 700; color: #fff; }
+.wave-card span { display: block; margin-top: 3px; font-size: 11px; line-height: 1.35; color: #a9a9b6; }
+.wave-card em { display: block; margin-top: 7px; font-size: 9px; font-style: normal; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--color-gold); }
+.wave-person:hover .wave-card, .wave-person:focus-within .wave-card { opacity: 1; translate: -50% 0; }
+
+/* Keep the complete line-up in view, with the photo and wave layers scaling together. */
+.wave-note-touch { display: none; }
+@media (max-width: 767px) {
+  #group h2 { font-size: clamp(1.5rem, 5.6vw, 2.5rem); line-height: 1.1; }
+  .wave-group { margin-top: 24px; }
+  .wave-card { top: auto; bottom: 8px; padding: 6px 8px; max-width: min(52vw, 180px); }
+  .wave-card strong { font-size: 11px; }
+  .wave-card span { font-size: 9px; }
+  .wave-card em { margin-top: 4px; font-size: 8px; }
+}
+/* Touch users can tap a person to reveal their name. */
+@media (hover: none) {
+  .wave-zone { cursor: default; }
+  .wave-note-hover { display: none; }
+  .wave-note-touch { display: inline; }
+}
+
+/* -------------------------------------------------------------------------- */
+/* SHORTS REEL                                                                */
+/* The track carries the list twice and travels exactly half its own width, so
+   the second copy stands where the first did and the loop has no seam. Full
+   bleed with a mask at each edge, so cards arrive and leave rather than being
+   cut off by the page gutter. */
+.reel { position: relative; overflow: hidden; }
+.reel::before, .reel::after { content: ""; position: absolute; top: 0; bottom: 0; width: clamp(40px, 8vw, 140px); z-index: 2; pointer-events: none; }
+.reel::before { left: 0; background: linear-gradient(90deg, var(--color-noir, #08070b), transparent); }
+.reel::after { right: 0; background: linear-gradient(270deg, var(--color-noir, #08070b), transparent); }
+.reel-track { display: flex; width: max-content; animation: reelRun 64s linear infinite; will-change: transform; }
+.reel-run { display: flex; gap: clamp(10px, 1.1vw, 18px); padding-right: clamp(10px, 1.1vw, 18px); }
+.reel:hover .reel-track, .reel:focus-within .reel-track { animation-play-state: paused; }
+@keyframes reelRun { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+.reel-card { position: relative; flex: 0 0 clamp(132px, 15vw, 208px); aspect-ratio: 9 / 16; margin: 0; padding: 0; overflow: hidden;
+  border: 1px solid rgb(255 255 255 / .08); border-radius: 16px; background: #0b0910; cursor: pointer;
+  transition: transform .4s cubic-bezier(.25,1,.5,1), border-color .4s ease, box-shadow .4s ease; }
+.reel-card img { object-fit: cover; }
+.reel-card:hover, .reel-card:focus-visible { transform: translateY(-6px); border-color: rgb(212 175 55 / .45); box-shadow: 0 18px 40px rgb(0 0 0 / .55); }
+.reel-play { position: absolute; left: 50%; top: 50%; display: flex; height: 44px; width: 44px; transform: translate(-50%, -50%); align-items: center; justify-content: center;
+  border-radius: 999px; background: linear-gradient(135deg, var(--color-gold-light, #f2d98b), var(--color-gold, #d4af37)); color: #000;
+  box-shadow: 0 0 24px rgb(212 175 55 / .45); opacity: 0; transition: opacity .3s ease; }
+.reel-card:hover .reel-play, .reel-card:focus-visible .reel-play { opacity: 1; }
+
+/* Fit the complete player, including its close control, inside short screens. */
+.shorts-overlay { padding: max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left)); }
+.shorts-dialog { width: min(420px, 100%, calc((100dvh - 110px - env(safe-area-inset-top) - env(safe-area-inset-bottom)) * 9 / 16)); max-height: calc(100dvh - 24px - env(safe-area-inset-top) - env(safe-area-inset-bottom)); overflow-y: auto; }
+.shorts-dialog iframe { width: 100%; height: auto; aspect-ratio: 9 / 16; }
+
+@media (max-width: 639px) {
+  #host h2, #journey h3, #nominate h2 { font-size: clamp(1.875rem, 8vw, 2.5rem); }
+  #hero a { max-width: 360px; }
+  .wave-group { border-radius: 12px; }
+}
+
+/* Touch users control the reel themselves, with visible play affordances. */
+@media (hover: none) and (pointer: coarse) {
+  .reel { overflow-x: auto; overscroll-behavior-x: contain; scroll-padding-inline: var(--page-gutter); }
+  .reel-track { animation: none; padding-inline: var(--page-gutter); }
+  .reel-run[aria-hidden="true"] { display: none; }
+  .reel-card { flex-basis: clamp(150px, 42vw, 208px); }
+  .reel-play { opacity: 1; }
+  .reel::before, .reel::after { display: none; }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .reference-hero { min-height: 280px; height: 100svh; }
+  .hero-logo video { object-fit: contain; }
+}
+
+/* Without motion the reel becomes a plain, swipeable strip. */
+@media (prefers-reduced-motion: reduce) {
+  .reel { overflow-x: auto; }
+  .reel-track { animation: none; }
+}
+
+/* ========================================================================== */
+/* FILM CASCADE                                                               */
+/* The helix layout is the reference's; the surface is this site's. Type comes */
+/* from the same three faces as every other section (Cinzel for names,        */
+/* Cormorant for the italic lines, Jakarta for the rest), and the backdrop is  */
+/* the site's black with a gold wash rather than the drifting purple shader    */
+/* the reference runs. Everything stays scoped to .runway: the original wrote  */
+/* these as global html/body/button rules, which would restyle the whole page. */
+/* ========================================================================== */
+.runway{margin:0;background:var(--color-noir);color:var(--color-light);font-family:var(--font-sans)}
+.runway button,.runway a{-webkit-tap-highlight-color:transparent}
+.runway button{font:inherit;color:inherit}
+.runway button:focus-visible,.runway a:focus-visible{outline:2px solid var(--color-gold);outline-offset:8px}
+
+.runway{position:relative}
+/* `.c-bg`: the full-screen shader, blurred and hue-rotated exactly as shipped.
+   Changed from ui's `position:fixed` to `absolute`, and the element moved inside
+   `.stage` in SpiralGallery.tsx. In ui/ the gallery IS the whole page, so a fixed
+   background is harmless; here it painted over every section of the site at every
+   scroll position. `.stage` is sticky and 100svh, so an absolute inset:0 child
+   fills the viewport identically while the gallery is pinned, and nowhere else. */
+/* The backdrop the films travel through. This was a WebGL shader drifting
+   through purples, which belonged to the reference and to nothing else here. */
+.c-bg{position:absolute;inset:0;z-index:0;background:
+  radial-gradient(130% 85% at 50% -10%, rgba(212,175,55,.13), transparent 58%),
+  radial-gradient(90% 65% at 50% 112%, rgba(212,175,55,.07), transparent 62%),
+  radial-gradient(100% 100% at 50% 50%, #131219 0%, var(--color-noir) 70%)}
+/* `.c-wrapper`: the three.js layer over it. */
+.stage{position:sticky;top:0;height:100svh;width:100%;overflow:hidden;isolation:isolate;z-index:1}
+.gallery{position:absolute;inset:0}
+
+.plane{position:absolute;inset:0}
+/* `will-change` names transform ONLY. Adding `opacity` here composites the card
+   as one layer and the <video> inside it stops getting a video layer of its
+   own: it plays on and paints solid black. */
+.project{position:absolute;left:0;top:0;width:600px;padding:0;margin:0;border:0;background:transparent;text-decoration:none;color:inherit;transform-origin:0 0;will-change:transform;cursor:pointer;visibility:hidden;display:block}
+/* Cards carry footage only — there is no still underneath. */
+.picture{position:relative;display:block;width:600px;height:337.5px;overflow:hidden;background:var(--color-noir-card)}
+/* `will-change:transform` keeps each clip on a video layer of its own. Without
+   it the cards come up solid black on a fresh load: the footage plays, the
+   frames decode, and the compositor draws none of them until some unrelated
+   style change happens to invalidate the whole stage. */
+.picture video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;will-change:transform}
+
+/* Labels are siblings of the plane in the original, so they ride the card's own
+   projection: authored at the card's 600px width, then scaled by the same factor
+   the projection gives the picture, and hung off its bottom edge. */
+.caption{position:absolute;left:0;top:0;width:600px;text-align:center;transform-origin:50% 0;pointer-events:none;visibility:hidden;color:var(--color-light);will-change:transform,opacity}
+.label{display:block;font-weight:400;white-space:nowrap}
+.label-guest{font-family:"Glitz",var(--font-cinzel);font-weight:400;text-transform:uppercase;letter-spacing:.04em;font-size:19px;line-height:1.22;color:var(--color-light)}
+.label-title{font-family:var(--font-sans);font-weight:400;font-size:24px;line-height:1.3;margin-top:.3em;color:var(--color-gold-light);white-space:normal;text-wrap:balance;padding:0 24px}
+.label-ep{margin-top:.2em;font-family:var(--font-sans);font-size:15px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--color-gold-muted)}
+
+.no-script{position:fixed;inset:30% 10%;z-index:999;text-align:center}
+
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+
+/* Story frames bracket a single, front-facing film choreography. */
+/* Glitz, like every other heading. It carries far more weight per word than the
+   Cormorant italic it replaces and sets about 13% wider, so the size comes down
+   to keep the statement inside the frame; and there is no italic in the family,
+   which would otherwise be faked as a skew. */
+.gallery-story{position:absolute;z-index:10;top:20%;left:50%;width:min(90%,880px);transform:translateX(-50%);text-align:center;font-family:"Glitz",var(--font-cinzel);font-size:clamp(20px,2.1vw,36px);line-height:1.22;color:var(--color-light);pointer-events:none}
+.gallery-story p{margin:0 0 .8em;text-wrap:balance}
+
+/* The category of whichever card is nearest the camera, set large at the left
+   edge the way the reference holds it while a run of films goes past. */
+.gallery-now{position:absolute;z-index:8;left:5.5%;top:19%;width:min(40%,560px);opacity:0;pointer-events:none}
+.now-card{display:block;animation:nowSwap .7s cubic-bezier(.22,.61,.36,1) both}
+.now-ep{display:flex;align-items:center;gap:12px;font-family:var(--font-sans);font-size:11px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--color-gold)}
+.now-ep::before{content:'';width:32px;height:1px;background:rgb(212 175 55 / .55)}
+.now-title{display:block;margin-top:16px;font-family:"Glitz",var(--font-cinzel);font-weight:400;text-transform:uppercase;font-size:clamp(24px,3.1vw,52px);line-height:1.04;letter-spacing:-.01em;color:var(--color-light)}
+.now-sub{display:block;margin-top:12px;font-family:var(--font-cormorant);font-style:italic;font-size:clamp(15px,1.3vw,22px);line-height:1.3;color:var(--color-light-muted)}
+@keyframes nowSwap{from{opacity:0;transform:translateY(.3em)}to{opacity:1;transform:none}}
+.runway .project{backface-visibility:hidden}
+@media(max-width:767px){.gallery-story{top:17%;font-size:clamp(18px,4.6vw,28px);line-height:1.24}
+  .gallery-now{left:6%;top:13%;width:min(72%,420px)}
+  .now-title{font-size:clamp(22px,6.4vw,38px)}}
+@media(prefers-reduced-motion:reduce){.now-card{animation:none}}
+
+/* Fit existing components to compact screens without changing the desktop design. */
+#hero svg { flex-shrink: 0; }
+.wave-card { overflow-wrap: anywhere; }
+.wave-person:first-of-type .wave-card { left: 8px !important; translate: 0 10px; }
+.wave-person:last-child .wave-card { left: auto !important; right: 8px; translate: 0 10px; }
+.wave-person:first-of-type:is(:hover, :focus-within) .wave-card,
+.wave-person:last-child:is(:hover, :focus-within) .wave-card { translate: 0 0; }
+
+@media (max-width: 767px) {
+  #group { padding-block: var(--section-space); }
+  .wave-note-hover { display: none; }
+  .wave-note-touch { display: inline; }
+  .reel { overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity; scroll-padding-inline: var(--page-gutter); }
+  .reel-track { animation: none; padding-inline: var(--page-gutter); }
+  .reel-run[aria-hidden="true"] { display: none; }
+  .reel-card { flex-basis: clamp(150px, 42vw, 208px); scroll-snap-align: start; }
+  .reel-play { opacity: 1; }
+  .reel::before, .reel::after { display: none; }
+}
+
+@media (max-width: 479px) {
+  #hero { min-height: auto; }
+  #hero > .site-container > :first-child { padding-inline: 12px; }
+  #hero > .site-container > :first-child > span:last-child { font-size: 10px; letter-spacing: .1em; }
+  #hero p { font-size: 16px; }
+  #hero > .site-container > :last-child { font-size: 9px; line-height: 1.7; }
+  #episodes h2 { font-size: clamp(1.875rem, 8.8vw, 2.25rem); }
+  .not-found { padding: 80px var(--page-gutter); }
+  .not-found h1 { font-size: clamp(36px, 12vw, 64px); }
+}
+
+/* Follow the gallery width breakpoints so short landscape screens take priority. */
+@media (max-height: 500px) and (orientation: landscape) {
+  .gallery-story { top: 8%; font-size: clamp(16px, 2.4vw, 24px); }
+  .gallery-now { top: 8%; width: 34%; }
+  .now-title { margin-top: 8px; font-size: clamp(18px, 2.8vw, 28px); }
+  .now-sub { margin-top: 8px; font-size: 14px; }
+  .shorts-dialog > div { padding: 4px 8px; }
+  .shorts-dialog > div > span { font-size: 8px; letter-spacing: .05em; }
+}
+
+/* Field columns follow the card's available width on tablets and laptops. */
+.nomination-card { container-type: inline-size; }
+.nomination-fields { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.25rem; }
+@container (min-width: 400px) {
+  .nomination-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

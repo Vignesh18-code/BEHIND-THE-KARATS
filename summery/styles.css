@@ -1,0 +1,342 @@
+/* -------------------------------------------------------------------------- */
+/* BEHIND THE KARATS — LUXURY EDITORIAL DESIGN SYSTEM                        */
+/* -------------------------------------------------------------------------- */
+
+:root {
+  --bg-noir: #08080b;
+  --bg-noir-dark: #040406;
+  --bg-noir-card: #0f1016;
+  --bg-noir-light: #151620;
+  
+  --gold: #d4af37;
+  --gold-light: #f5e296;
+  --gold-dark: #997528;
+  --gold-muted: #968664;
+  --gold-glow: rgba(212, 175, 55, 0.25);
+  
+  --text-light: #f3f3f6;
+  --text-muted: #9c9ca8;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-gold: rgba(212, 175, 55, 0.35);
+
+  --font-cinzel: 'Cinzel', serif;
+  --font-cormorant: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Reset & Core Setup */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg-noir);
+  color: var(--text-light);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  overflow-x: hidden;
+  background: radial-gradient(circle at 50% 0%, #17161f 0%, var(--bg-noir) 75%);
+  min-height: 100vh;
+}
+
+/* Typography Helpers */
+.font-cinzel { font-family: var(--font-cinzel); }
+.font-cormorant { font-family: var(--font-cormorant); }
+.font-sans { font-family: var(--font-sans); }
+
+.gold-gradient-text {
+  background: linear-gradient(135deg, #ffffff 0%, #fae69e 25%, #d4af37 60%, #aa802c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* Subtle Film Grain */
+.film-grain {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Ambient Glowing Background Orbs */
+.ambient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.4;
+  animation: floatOrb 18s ease-in-out infinite alternate;
+}
+
+.ambient-orb-1 {
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
+  top: -100px;
+  left: 15%;
+}
+
+.ambient-orb-2 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(160, 110, 30, 0.12) 0%, transparent 70%);
+  top: 40%;
+  right: -10%;
+  animation-delay: -6s;
+}
+
+.ambient-orb-3 {
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
+  bottom: 5%;
+  left: 5%;
+  animation-delay: -11s;
+}
+
+@keyframes floatOrb {
+  0% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-40px) scale(1.08) translateX(25px); }
+  100% { transform: translateY(20px) scale(0.95) translateX(-20px); }
+}
+
+/* Custom Luxury Cursor Follower */
+#cursor-glow {
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.07) 0%, transparent 70%);
+  border-radius: 50%;
+  transition: transform 0.12s ease-out, opacity 0.3s ease;
+  will-change: transform;
+}
+
+#cursor-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--gold);
+  transition: transform 0.04s ease-out;
+  will-change: transform;
+}
+
+@media (pointer: coarse) {
+  #cursor-glow, #cursor-dot {
+    display: none;
+  }
+}
+
+/* Top Ticker */
+.luxury-ticker {
+  background: rgba(8, 8, 12, 0.85);
+  font-family: var(--font-sans);
+}
+
+.ticker-item {
+  color: #c9b98b;
+  font-size: 11px;
+}
+
+.gold-bullet {
+  color: var(--gold);
+  font-size: 9px;
+  margin-right: 6px;
+}
+
+/* Navigation */
+#main-header {
+  background: rgba(8, 8, 12, 0.75);
+}
+
+#main-header.scrolled {
+  background: rgba(6, 6, 9, 0.95);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.nav-link {
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  width: 0;
+  height: 1.5px;
+  background: var(--gold);
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+/* 3D Perspective Tilt Card System */
+.card-3d {
+  position: relative;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+  will-change: transform;
+}
+
+.card-3d:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 30px rgba(212, 175, 55, 0.15);
+}
+
+.card-glare {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.12) 0%, transparent 60%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.card-3d:hover .card-glare {
+  opacity: 1;
+}
+
+/* WebGL Container */
+#webgl-container {
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+}
+
+#webgl-container:active {
+  cursor: grabbing;
+}
+
+/* Interactive Timeline */
+.timeline-line {
+  background: linear-gradient(180deg, rgba(212, 175, 55, 0.1) 0%, #d4af37 50%, rgba(212, 175, 55, 0.2) 100%);
+}
+
+.timeline-item {
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+/* Episode Filters */
+.filter-btn {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.filter-btn.active {
+  background: var(--gold);
+  color: #000;
+  font-weight: 700;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+}
+
+/* Form Styles */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label {
+  font-family: var(--font-cinzel);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #d1d1db;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.form-input {
+  width: 100%;
+  padding: 13px 16px;
+  border-radius: 12px;
+  background: rgba(10, 10, 15, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 14px;
+  font-family: var(--font-sans);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  outline: none;
+}
+
+.form-input:focus {
+  border-color: var(--gold);
+  background: rgba(16, 17, 25, 0.95);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.25);
+}
+
+.form-input::placeholder {
+  color: #5d5d6c;
+  font-size: 13px;
+}
+
+.form-input.is-invalid {
+  border-color: #f87171 !important;
+}
+
+/* Video Player Modal */
+#video-modal {
+  transition: opacity 0.35s ease;
+}
+
+#video-modal.open {
+  display: flex !important;
+  opacity: 1 !important;
+}
+
+/* Animations */
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spinSlow 16s linear infinite;
+}
+
+/* Reveal Fade for elements on scroll */
+.reveal-fade {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.reveal-fade.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #08080b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #252431;
+  border-radius: 4px;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-dark);
+}
