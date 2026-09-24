@@ -67,7 +67,7 @@ export function PhoneYouTubeScreen({ onPlayingChange }: { onPlayingChange?: (pla
       <div className="mt-3 flex items-center justify-between px-4">
         <div className="flex items-center gap-2">
           <span className="flex h-7 w-7 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white">
-            <Image src="/images/logo-mark.png" alt="" width={875} height={554} className="h-full w-full object-contain p-0.5" />
+            <Image src="/images/logo-mark.webp" alt="" width={300} height={190} className="h-full w-full object-contain p-0.5" />
           </span>
           <button type="button" className="rounded-full bg-white px-3.5 py-1 text-[11px] font-semibold text-black">Subscribe</button>
         </div>
@@ -95,7 +95,7 @@ export function PhoneYouTubeScreen({ onPlayingChange }: { onPlayingChange?: (pla
             {item.thumb ? <Image src={item.thumb} alt="" width={720} height={405} sizes="160px"
               className="absolute inset-0 h-full w-full object-cover" />
               : <span className="absolute inset-0 flex items-center justify-center">
-                  <Image src="/images/logo-mark.png" alt="" width={875} height={554} className="w-[70%] opacity-40" />
+                  <Image src="/images/logo-mark.webp" alt="" width={300} height={190} className="w-[70%] opacity-40" />
                 </span>}
             <span className="absolute bottom-1 right-1 rounded bg-black/80 px-1 py-px text-[8px] font-medium tabular-nums">{item.duration}</span>
           </div>
@@ -118,7 +118,7 @@ export function PhoneYouTubeScreen({ onPlayingChange }: { onPlayingChange?: (pla
       <Tab Icon={SquarePlay} label="Subscriptions" dot />
       <div className="flex flex-col items-center gap-1">
         <span className="h-[18px] w-[18px] overflow-hidden rounded-full bg-white">
-          <Image src="/images/logo-mark.png" alt="" width={875} height={554} className="h-full w-full object-contain" />
+          <Image src="/images/logo-mark.webp" alt="" width={300} height={190} className="h-full w-full object-contain" />
         </span>
         <span className="text-[8px] text-white/70">You</span>
       </div>

@@ -67,13 +67,13 @@ export function GroupWave() {
       {/* All photo layers share the same fluid frame so the full line-up fits on phones. */}
       <figure className="wave-group mt-12" aria-label="The Behind The Karats line-up">
         <div className="wave-frame">
-        <Image className="wave-base" src="/media/group.png" alt={GROUP_SECTION.alt}
+        <Image className="wave-base" src="/media/group.webp" alt={GROUP_SECTION.alt}
           width={1634} height={962} sizes="(max-width: 1280px) 100vw, 1280px" />
         {SLOTS.map((slot, i) => {
           const person = GROUP_PEOPLE[i];
           const named = Boolean(person?.name);
           return <div key={i} className="wave-person">
-            <Image className="wave-hi" src="/media/grouphandup.png" alt="" aria-hidden="true"
+            <Image className="wave-hi" src="/media/grouphandup.webp" alt="" aria-hidden="true"
               width={1634} height={962} sizes="(max-width: 1280px) 100vw, 1280px" style={{ clipPath: slot.reveal }} />
             {person?.href
               ? <a className="wave-zone" style={{ clipPath: slot.zone }} href={person.href}

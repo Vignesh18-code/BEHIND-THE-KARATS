@@ -65,7 +65,7 @@ export function PhoneProfileScreen() {
     {/* ── hero portrait ── */}
     <div className="relative h-[54%] shrink-0 overflow-hidden">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_42%,rgba(212,175,55,0.30),transparent_65%)]" />
-      <Image src="/images/vikaspic.png" alt={HOST.name} width={860} height={899} sizes="400px" priority
+      <Image src="/images/vikaspic.webp" alt={HOST.name} width={860} height={899} sizes="400px" priority
         className={`absolute inset-0 h-full w-full object-cover object-top transition-[transform,opacity] duration-[1600ms] ease-out ${
           inView ? "scale-100 opacity-100" : "scale-[1.12] opacity-0"} phone-kenburns`} />
       <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#0b0b12] via-[#0b0b12]/80 to-transparent" />

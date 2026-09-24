@@ -17,7 +17,7 @@ export default function Home() {
         <HeroLogo />
         <div className="reference-stars" aria-hidden="true">{Array.from({length:180}, (_,i)=><i key={i} style={{left:`${(i * 61.80339887) % 100}%`,top:`${(i * 37.137) % 100}%`,opacity:.15+(i%5)*.06}} />)}</div>
         <h1 id="hero-title" className="hero-accessible-title">Behind the Karats — ft. Vikas Singhvi</h1>
-        <Image className="reference-portrait" src="/images/vikas.png" alt="Vikas Singhvi" width={620} height={1122} priority sizes="(max-width: 700px) 24vw, 20vw" />
+        <Image className="reference-portrait" src="/images/vikas.webp" alt="Vikas Singhvi" width={620} height={1122} priority sizes="(max-width: 700px) 24vw, 20vw" />
         <Image className="reference-mic" src="/images/mic.webp" alt="" width={2254} height={1454} priority sizes="(max-width: 700px) 44vw, 38vw" />
       </section>
 

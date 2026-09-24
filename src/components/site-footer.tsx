@@ -6,7 +6,7 @@ export function SiteFooter() {
   return <footer className="relative z-20 border-t border-white/10 bg-black py-12 text-xs text-light-muted">
     <div className="site-container flex flex-col items-center gap-8 md:flex-row md:justify-between">
       <div className="flex flex-col items-center gap-3 md:flex-row md:items-center md:gap-4">
-        <Image src="/images/logo-mark.png" alt="Behind The Karats" width={875} height={554} className="h-10 w-auto" />
+        <Image src="/images/logo-mark.webp" alt="Behind The Karats" width={300} height={190} className="h-10 w-auto" />
         <div className="text-center md:text-left">
           <p className="font-cinzel text-sm font-bold tracking-[0.2em] text-white">BEHIND THE KARATS</p>
           <p className="mt-1 tracking-wider text-gold-muted">ft. Vikas Singhvi — Real people. Real journeys. Beyond the karats.</p>
