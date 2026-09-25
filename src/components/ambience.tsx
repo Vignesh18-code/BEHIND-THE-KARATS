@@ -11,15 +11,27 @@ export function Ambience() {
     if (window.matchMedia("(pointer: coarse)").matches) return;
     let x = innerWidth / 2, y = innerHeight / 2, gx = x, gy = y, frame = 0;
 
-    const move = (event: PointerEvent) => { x = event.clientX; y = event.clientY; };
+    // The glow trails the cursor, so it has something to do only while it is
+    // still catching up. Running the loop unconditionally kept a frame callback
+    // alive for the whole visit — and on this page it shares the main thread
+    // with the scroll-driven cascade.
     const raf = () => {
       gx += (x - gx) * 0.09;
       gy += (y - gy) * 0.09;
       if (glow.current) glow.current.style.transform = `translate3d(${gx - 160}px, ${gy - 160}px, 0)`;
       if (dot.current) dot.current.style.transform = `translate3d(${x - 3}px, ${y - 3}px, 0)`;
+      // Below half a pixel the easing is invisible; park until the cursor moves.
+      if (Math.abs(x - gx) < 0.5 && Math.abs(y - gy) < 0.5) { gx = x; gy = y; frame = 0; return; }
       frame = requestAnimationFrame(raf);
     };
-    frame = requestAnimationFrame(raf);
+
+    const move = (event: PointerEvent) => {
+      x = event.clientX;
+      y = event.clientY;
+      if (!frame) frame = requestAnimationFrame(raf);
+    };
+
+    raf();
     window.addEventListener("pointermove", move, { passive: true });
     return () => { cancelAnimationFrame(frame); window.removeEventListener("pointermove", move); };
   }, []);
