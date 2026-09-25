@@ -2,10 +2,13 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: "export",
-  // Static export, so there is no image server to resize anything: every file
-  // in public/ is served exactly as it sits on disk and is sized for its slot
-  // at build time instead.
-  images: { unoptimized: true },
+  // Serve prebuilt responsive images without requiring an image server.
+  images: {
+    loader: "custom",
+    loaderFile: "./src/lib/image-loader.ts",
+    deviceSizes: [320, 480, 640, 960, 1280, 1920],
+    imageSizes: [160, 240],
+  },
   poweredByHeader: false,
   reactStrictMode: true,
   productionBrowserSourceMaps: false,

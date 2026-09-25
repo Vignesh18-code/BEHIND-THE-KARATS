@@ -39,7 +39,9 @@ export function GoldPlayButton3D() {
 
       // Metals need something to reflect — without this the gold renders black.
       const pmrem = new THREE.PMREMGenerator(renderer);
-      const envRT = pmrem.fromScene(new RoomEnvironment(), 0.04);
+      const environment = new RoomEnvironment();
+      const envRT = pmrem.fromScene(environment, 0.04);
+      environment.dispose();
       scene.environment = envRT.texture;
       pmrem.dispose();
 
@@ -172,14 +174,20 @@ export function GoldPlayButton3D() {
         cage.position.y = button.position.y;
         renderer.render(scene, camera);
       };
-      animate();
       cleanups.push(() => cancelAnimationFrame(frame));
 
       // pause when off-screen so the hero costs nothing further down the page
-      const visibility = new IntersectionObserver(([entry]) => {
-        if (entry.isIntersecting) { if (!frame) animate(); }
+      let onscreen = false;
+      const syncAnimation = () => {
+        if (onscreen && !document.hidden) { if (!frame) animate(); }
         else { cancelAnimationFrame(frame); frame = 0; }
+      };
+      const visibility = new IntersectionObserver(([entry]) => {
+        onscreen = entry.isIntersecting;
+        syncAnimation();
       }, { threshold: 0 });
+      document.addEventListener("visibilitychange", syncAnimation);
+      cleanups.push(() => document.removeEventListener("visibilitychange", syncAnimation));
       visibility.observe(container);
       cleanups.push(() => visibility.disconnect());
 

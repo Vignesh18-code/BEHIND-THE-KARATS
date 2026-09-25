@@ -7,6 +7,7 @@ const SETTLED_TIME = 130 / 30;
 
 export function HeroLogo() {
   const video = useRef<HTMLVideoElement>(null);
+  const manuallyPaused = useRef(false);
   const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
@@ -14,7 +15,9 @@ export function HeroLogo() {
     if (!el) return;
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
+    let onscreen = true;
     const syncPlayback = () => {
+      if (document.hidden || !onscreen || manuallyPaused.current) { el.pause(); return; }
       if (motion.matches) {
         el.pause();
         // Hold on the settled logo rather than the near-empty first frame.
@@ -32,11 +35,18 @@ export function HeroLogo() {
     // the file twice.
     el.preload = "auto";
     syncPlayback();
-    const retry = () => { if (!document.hidden) syncPlayback(); };
+    const retry = () => syncPlayback();
+    const observer = new IntersectionObserver(([entry]) => {
+      onscreen = entry.isIntersecting;
+      syncPlayback();
+    });
+    observer.observe(el);
     el.addEventListener("canplay", syncPlayback);
     document.addEventListener("visibilitychange", retry);
     motion.addEventListener("change", syncPlayback);
     return () => {
+      observer.disconnect();
+      el.pause();
       el.removeEventListener("canplay", syncPlayback);
       document.removeEventListener("visibilitychange", retry);
       motion.removeEventListener("change", syncPlayback);
@@ -46,6 +56,7 @@ export function HeroLogo() {
   return <button className="hero-logo" type="button"
     aria-label={`${playing ? "Pause" : "Play"} Behind the Karats logo animation`}
     onClick={() => {
+      manuallyPaused.current = playing;
       if (playing) video.current?.pause();
       else void video.current?.play().catch(() => {});
     }}>

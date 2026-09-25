@@ -79,7 +79,7 @@ export function Episodes() {
         {[0, 1].map(copy => <div key={copy} className="reel-run" aria-hidden={copy === 1 || undefined}>
           {SHORTS.map(id => <button key={`${copy}-${id}`} type="button" className="reel-card"
             tabIndex={copy === 1 ? -1 : 0} onClick={() => setOpen(id)} aria-label="Play short">
-            <Image src={thumbnail(id)} alt="" fill sizes="(max-width: 880px) 15vw, 208px" />
+            <Image unoptimized src={thumbnail(id)} alt="" fill sizes="(max-width: 880px) 15vw, 208px" />
             <span className="reel-play"><IconPlay className="h-4 w-4 translate-x-0.5" /></span>
           </button>)}
         </div>)}

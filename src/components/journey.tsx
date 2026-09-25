@@ -11,15 +11,12 @@ export function Journey() {
   const track = useRef<HTMLDivElement>(null);
   const rail = useRef<HTMLDivElement>(null);
 
-  // Gold rail fills as the chapters scroll past. It is driven by its own frame
-  // loop and written straight to the node: the page scrolls under Lenis, which
-  // is still gliding after the last scroll event fires, so a rail that only
-  // moves on those events arrives in steps. React state here would also
-  // re-render every chapter on every frame.
+  // Scroll wakes the rail; frames continue until its existing easing settles.
   useEffect(() => {
     const el = track.current, bar = rail.current;
     if (!el || !bar) return;
     let frame = 0;
+    let nearby = false;
     // Empty as the first chapter comes up from the fold, full once the last one
     // has settled above the middle of the screen.
     const target = () => {
@@ -30,21 +27,33 @@ export function Journey() {
     const paint = () => { bar.style.transform = `scaleY(${shown.toFixed(4)})`; };
     paint();
     const render = () => {
-      frame = requestAnimationFrame(render);
+      frame = 0;
       const want = target();
       // Easing towards the target rather than snapping to it keeps the fill
       // gliding through the frames where the scroll position barely moves.
       shown += (want - shown) * .14;
       if (Math.abs(want - shown) < .0004) shown = want;
       paint();
+      if (shown !== want) wake();
     };
-    // The loop only runs while the section is anywhere near the viewport.
+    function wake() {
+      if (nearby && !document.hidden && !frame) frame = requestAnimationFrame(render);
+    }
     const watch = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting && !frame) frame = requestAnimationFrame(render);
-      else if (!entry.isIntersecting && frame) { cancelAnimationFrame(frame); frame = 0; }
+      nearby = entry.isIntersecting;
+      if (nearby) wake();
+      else { cancelAnimationFrame(frame); frame = 0; }
     }, { rootMargin: "250px 0px" });
     watch.observe(el);
-    return () => { watch.disconnect(); cancelAnimationFrame(frame); };
+    window.addEventListener("scroll", wake, { passive: true });
+    window.addEventListener("resize", wake);
+    document.addEventListener("visibilitychange", wake);
+    return () => {
+      watch.disconnect(); cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", wake);
+      window.removeEventListener("resize", wake);
+      document.removeEventListener("visibilitychange", wake);
+    };
   }, []);
 
   return <section id="journey" className="relative z-20 overflow-hidden border-t border-white/5 bg-noir-light/60 section-space">

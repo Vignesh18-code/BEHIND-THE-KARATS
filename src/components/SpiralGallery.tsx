@@ -35,15 +35,15 @@ export default function SpiralGallery() {
       height = runway.current?.querySelector('.stage')?.clientHeight ?? innerHeight;
       distance = scrollDistance(width, height);
       if (runway.current) runway.current.style.height = `${distance + height}px`;
+      schedule();
     };
-    resize();
     window.addEventListener('resize', resize);
     const sizeObserver = new ResizeObserver(resize);
     const stage = runway.current?.querySelector('.stage');
     if (stage) sizeObserver.observe(stage);
     let wasOnscreen = false;
     const render = () => {
-      frame = requestAnimationFrame(render);
+      frame = 0;
       const rect = runway.current?.getBoundingClientRect();
       if (!rect) return;
       const onscreen = rect.top < height && rect.bottom > 0 && !document.hidden;
@@ -116,11 +116,23 @@ export default function SpiralGallery() {
         }
       });
     };
-    frame = requestAnimationFrame(render);
+    // Only scroll and size changes affect projection; videos animate natively.
+    function schedule() {
+      if (!frame) frame = requestAnimationFrame(render);
+    }
+    resize();
+    window.addEventListener('scroll', schedule, { passive: true });
+    document.addEventListener('visibilitychange', schedule);
+    reduced.addEventListener('change', schedule);
     const mountedVideos = videos.current;
+    mountedVideos.forEach(video => video?.addEventListener('loadedmetadata', schedule));
     return () => {
       cancelAnimationFrame(frame);
       window.removeEventListener('resize', resize);
+      window.removeEventListener('scroll', schedule);
+      document.removeEventListener('visibilitychange', schedule);
+      reduced.removeEventListener('change', schedule);
+      mountedVideos.forEach(video => video?.removeEventListener('loadedmetadata', schedule));
       sizeObserver.disconnect();
       mountedVideos.forEach(video => video?.pause());
     };
