@@ -45,13 +45,53 @@ export default function SpiralGallery() {
     };
     window.addEventListener('resize', resize);
     const sizeObserver = new ResizeObserver(resize);
-    const stage = runway.current?.querySelector('.stage');
+    const stage = runway.current?.querySelector<HTMLElement>('.stage') ?? null;
     if (stage) sizeObserver.observe(stage);
+
+    // The stage is pinned with `position: sticky`, and on some phones that
+    // simply does not hold — older iPhone WebKit, which Chrome on iOS uses too,
+    // lets the stage scroll away and leaves screens of empty runway behind it.
+    // Every frame already measures the runway, so check the stage is where a
+    // working sticky would put it; if it is not, pin it from here instead with
+    // `position: fixed`, which those browsers do handle, and release it at
+    // both ends. Where sticky works this never switches on.
+    let pinnedByScript = false, pinState = '', pinLeft = -1, pinWidth = -1;
+    const pin = (rect: DOMRect) => {
+      if (!stage) return;
+      if (!pinnedByScript) {
+        // As soon as the runway's top has gone past the top of the screen a
+        // working sticky stage reads 0; a broken one moves with the page. Judge
+        // it on the first frame that can tell them apart, so the stage barely
+        // drifts before it is caught. (A wrong call costs nothing: pinned by
+        // script looks the same.)
+        if (!(rect.top < -3 && rect.bottom > height + 3)) return;
+        if (Math.abs(stage.getBoundingClientRect().top) <= 2) return;
+        pinnedByScript = true;
+        runway.current?.setAttribute('data-pin', 'script');
+      }
+      const next = rect.top >= 0 ? 'before' : rect.bottom <= height ? 'after' : 'pinned';
+      const s = stage.style;
+      if (next === 'pinned' && (rect.left !== pinLeft || rect.width !== pinWidth)) {
+        pinLeft = rect.left; pinWidth = rect.width;
+        s.left = `${rect.left}px`; s.width = `${rect.width}px`;
+      }
+      if (next === pinState) return;
+      pinState = next;
+      if (next === 'pinned') { s.position = 'fixed'; s.top = '0'; s.bottom = 'auto'; }
+      else {
+        pinLeft = pinWidth = -1;
+        s.position = 'absolute'; s.left = '0'; s.width = '100%';
+        s.top = next === 'before' ? '0' : 'auto';
+        s.bottom = next === 'after' ? '0' : 'auto';
+      }
+    };
     let wasOnscreen = false;
     const render = () => {
       frame = 0;
       const rect = runway.current?.getBoundingClientRect();
       if (!rect) return;
+      // Before the off-screen return, so a script-pinned stage is always let go.
+      pin(rect);
       const onscreen = rect.top < height && rect.bottom > 0 && !document.hidden;
       // Avoid projecting and writing every card while another section is visible.
       if (!onscreen) {
