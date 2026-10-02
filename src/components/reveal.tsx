@@ -10,7 +10,15 @@ export function Reveal({ children, as: Tag = "div", className = "", delay = 0 }:
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    if (!el || el.dataset.visible) return;
+    // Normally the observer started inline in the layout is already watching
+    // this element; observe() on a watched target is a no-op, and it covers
+    // anything mounted after the document was parsed.
+    const shared = (window as Window & { __reveal?: IntersectionObserver }).__reveal;
+    if (shared) {
+      shared.observe(el);
+      return () => shared.unobserve(el);
+    }
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       el.dataset.visible = "true";
       return;
@@ -24,7 +32,10 @@ export function Reveal({ children, as: Tag = "div", className = "", delay = 0 }:
     return () => observer.disconnect();
   }, []);
 
-  return <Tag ref={ref} className={`reveal-fade ${className}`} style={delay ? { transitionDelay: `${delay}ms` } : undefined}>
+  // `data-visible` may already have been set by the inline observer before
+  // React hydrates; that is expected, not a mismatch.
+  return <Tag ref={ref} className={`reveal-fade ${className}`} style={delay ? { transitionDelay: `${delay}ms` } : undefined}
+    suppressHydrationWarning>
     {children}
   </Tag>;
 }

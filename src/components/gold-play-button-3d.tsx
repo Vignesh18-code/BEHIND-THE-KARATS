@@ -26,6 +26,14 @@ export function GoldPlayButton3D() {
       ]);
       if (disposed || !container) return;
 
+      // Setting the scene up is several heavy steps — the WebGL context, the
+      // reflection map, the extruded geometry, the shaders. Run back to back
+      // they were one ~170ms block on a mid-range phone, a dropped frame right
+      // as the hero scrolls in. Each now gets its own task, and anything made
+      // is registered for cleanup before the next wait, so leaving the page
+      // mid-setup still releases it.
+      const nextTask = () => new Promise<void>(resolve => setTimeout(resolve, 0));
+
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
       camera.position.z = 9.2;
@@ -36,6 +44,7 @@ export function GoldPlayButton3D() {
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
       renderer.toneMappingExposure = 1.05;
       container.appendChild(renderer.domElement);
+      cleanups.push(() => { renderer.domElement.remove(); renderer.dispose(); });
 
       // Metals need something to reflect — without this the gold renders black.
       const pmrem = new THREE.PMREMGenerator(renderer);
@@ -44,6 +53,9 @@ export function GoldPlayButton3D() {
       environment.dispose();
       scene.environment = envRT.texture;
       pmrem.dispose();
+      cleanups.push(() => envRT.dispose());
+      await nextTask();
+      if (disposed) return;
 
       const group = new THREE.Group();
       scene.add(group);
@@ -119,6 +131,13 @@ export function GoldPlayButton3D() {
       });
       const particles = new THREE.Points(particleGeo, particleMat);
       group.add(particles);
+      cleanups.push(() => {
+        [buttonGeo, cageGeo, particleGeo].forEach(g => g.dispose());
+        [goldMat, cageMat, particleMat].forEach(m => m.dispose());
+        discMap.dispose();
+      });
+      await nextTask();
+      if (disposed) return;
 
       // ---- studio lighting
       const ambient = new THREE.AmbientLight(0xffffff, 0.4);
@@ -126,6 +145,9 @@ export function GoldPlayButton3D() {
       const rim = new THREE.PointLight(0xf5e296, 2.5, 40); rim.position.set(-6, -3, -4);
       const follow = new THREE.PointLight(0xfffaed, 2, 30); follow.position.set(0, 0, 5);
       scene.add(ambient, main, rim, follow);
+      // Otherwise the gold's PBR shader compiles inside the first rendered frame.
+      await renderer.compileAsync(scene, camera);
+      if (disposed) return;
 
       // ---- interaction
       let dragging = false;
@@ -159,11 +181,12 @@ export function GoldPlayButton3D() {
       });
 
       // ---- loop
-      const clock = new THREE.Clock();
-      let frame = 0;
+      let frame = 0, startedAt = 0;
       const animate = () => {
         frame = requestAnimationFrame(animate);
-        const t = clock.getElapsedTime();
+        const now = performance.now();
+        if (!startedAt) startedAt = now;
+        const t = (now - startedAt) / 1000;
         if (!dragging) {
           group.rotation.y += (targetY - group.rotation.y) * 0.05 + 0.0025;
           group.rotation.x += (targetX - group.rotation.x) * 0.05;
@@ -201,14 +224,6 @@ export function GoldPlayButton3D() {
       sizeObserver.observe(container);
       cleanups.push(() => sizeObserver.disconnect());
 
-      cleanups.push(() => {
-        envRT.dispose();
-        renderer.domElement.remove();
-        renderer.dispose();
-        [buttonGeo, cageGeo, particleGeo].forEach(g => g.dispose());
-        [goldMat, cageMat, particleMat].forEach(m => m.dispose());
-        discMap.dispose();
-      });
     })();
 
     return () => { disposed = true; cleanups.forEach(fn => fn()); };

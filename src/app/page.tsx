@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { preload } from "react-dom";
 import { HeroLogo } from "@/components/hero-logo";
 import { KaratsHero } from "@/components/karats-hero";
 import { Host } from "@/components/host";
@@ -10,6 +11,11 @@ import SpiralGallery from "@/components/SpiralGallery";
 import { GroupWave } from "@/components/group-wave";
 
 export default function Home() {
+  // The logo film's poster is the largest thing on a phone's first screen, so
+  // it decides LCP — yet it was the one image there with no priority, sharing
+  // the connection evenly with the smaller portrait and mic. It goes first.
+  preload("/images/logo-poster.webp", { as: "image", fetchPriority: "high" });
+
   return <>
     <main id="main">
       {/* Title-film banner */}

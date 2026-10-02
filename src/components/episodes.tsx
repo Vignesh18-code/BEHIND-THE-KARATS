@@ -18,6 +18,24 @@ export function Episodes() {
   const [open, setOpen] = useState<string | null>(null);
   const dialog = useRef<HTMLDivElement>(null);
   const restoreTo = useRef<HTMLElement | null>(null);
+  const reel = useRef<HTMLDivElement>(null);
+  const [reelNear, setReelNear] = useState(false);
+
+  // The reel clips its overflow, and a lazy image only starts loading once it
+  // is inside that clip — so every card slid in empty and filled a beat later.
+  // Ask for all of them together as the reel nears the screen instead; the
+  // second copy of the strip reuses the same files.
+  useEffect(() => {
+    const el = reel.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      setReelNear(true);
+      observer.disconnect();
+    }, { rootMargin: "600px 0px" });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   // Modal: lock scroll, trap focus, close on Escape, restore focus on exit.
   useEffect(() => {
@@ -74,12 +92,13 @@ export function Episodes() {
 
     {/* The reel runs on its own; the track holds the list twice so the loop
         never shows a seam, and only the first copy is reachable. */}
-    <div className="reel mt-9" aria-label="Shorts reel" data-lenis-prevent-horizontal>
+    <div ref={reel} className="reel mt-9" aria-label="Shorts reel" data-lenis-prevent-horizontal>
       <div className="reel-track">
         {[0, 1].map(copy => <div key={copy} className="reel-run" aria-hidden={copy === 1 || undefined}>
           {SHORTS.map(id => <button key={`${copy}-${id}`} type="button" className="reel-card"
             tabIndex={copy === 1 ? -1 : 0} onClick={() => setOpen(id)} aria-label="Play short">
-            <Image unoptimized src={thumbnail(id)} alt="" fill sizes="(max-width: 880px) 15vw, 208px" />
+            <Image unoptimized src={thumbnail(id)} alt="" fill sizes="(max-width: 880px) 15vw, 208px"
+              loading={reelNear ? "eager" : "lazy"} />
             <span className="reel-play"><IconPlay className="h-4 w-4 translate-x-0.5" /></span>
           </button>)}
         </div>)}
