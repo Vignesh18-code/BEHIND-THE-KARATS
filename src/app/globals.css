@@ -159,8 +159,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
 .gold-shimmer { background-size: 200% auto; animation: shimmer 6s linear infinite; }
 
-.reveal-fade { opacity: 0; transform: translateY(24px); transition: opacity .7s cubic-bezier(.2,.8,.2,1), transform .7s cubic-bezier(.2,.8,.2,1); }
-.reveal-fade[data-visible="true"] { opacity: 1; transform: none; }
+/* Content is hidden for its entrance only once a script has said it is running
+   (`data-js`, set inline before first paint). Hidden unconditionally, any phone
+   whose JavaScript stalled or lost a chunk on a bad connection kept every
+   section after the cascade at opacity 0 — black down to the footer, which is
+   the one block that never fades in. */
+.reveal-fade { transition: opacity .7s cubic-bezier(.2,.8,.2,1), transform .7s cubic-bezier(.2,.8,.2,1); }
+[data-js] .reveal-fade { opacity: 0; transform: translateY(24px); }
+[data-js] .reveal-fade[data-visible="true"] { opacity: 1; transform: none; }
 
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: #08080b; }
@@ -179,7 +185,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: smooth; }
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
-  .reveal-fade { opacity: 1; transform: none; }
+  [data-js] .reveal-fade { opacity: 1; transform: none; }
   .ambient-orb { animation: none; }
 }
 

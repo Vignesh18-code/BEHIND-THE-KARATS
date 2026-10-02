@@ -12,6 +12,12 @@ import {
 const CARD_PX = PLANE_WIDTH * PX_PER_UNIT;
 /** Decoding every card at once costs more than it shows; the deep ones idle. */
 const MAX_PLAYING = 6;
+/**
+ * A phone has the hero logo and the host Short decoding too, and iOS starts
+ * refusing playback well before seven streams. The front cards are the ones
+ * big enough to read as motion; the rest hold their poster frame.
+ */
+const MAX_PLAYING_TOUCH = 3;
 
 export default function SpiralGallery() {
   const runway = useRef<HTMLElement>(null);
@@ -67,7 +73,7 @@ export default function SpiralGallery() {
         .map((_, slot) => slot)
         .filter(slot => opacities[slot] > .02)
         .sort((a, b) => Math.abs(placed[a].travel) - Math.abs(placed[b].travel));
-      const playable = new Set(nearest.slice(0, MAX_PLAYING));
+      const playable = new Set(nearest.slice(0, coarse ? MAX_PLAYING_TOUCH : MAX_PLAYING));
       // The overlay hands over to the next episode as that card takes the front.
       if (nearest.length && nearest[0] !== currentRef.current) {
         currentRef.current = nearest[0];
@@ -102,6 +108,8 @@ export default function SpiralGallery() {
           caption.style.zIndex = String(depthIndex(position.depth));
         }
         if (mounted && !video.getAttribute('src')) {
+          // Set together, so the still costs nothing until its card is near.
+          video.poster = film.poster;
           video.src = film.video;
           video.load();
         }

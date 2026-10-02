@@ -27,8 +27,13 @@ export const metadata: Metadata = {
 export const viewport: Viewport = { themeColor: "#08080b" };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en" className={`${cinzel.variable} ${cormorant.variable} ${jakarta.variable}`}>
+  // `data-js` is written by the inline script below, before React hydrates.
+  return <html lang="en" className={`${cinzel.variable} ${cormorant.variable} ${jakarta.variable}`} suppressHydrationWarning>
     <body className="bg-noir text-light antialiased">
+      {/* Runs during parse, ahead of the content it applies to, so entrance
+          animations can hide content without a flash — and if scripts never
+          run at all, nothing is hidden. */}
+      <script dangerouslySetInnerHTML={{ __html: "document.documentElement.dataset.js=''" }} />
       {/* Every heading on the page is Glitz, so it is worth fetching alongside
           the stylesheet instead of after it. Next hoists this into <head>. */}
       <link rel="preload" href="/Glitz/glitz.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
