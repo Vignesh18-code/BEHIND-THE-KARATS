@@ -31,19 +31,18 @@ export type Film = {
 
 export const films: Film[] = [
   { video: '/media/5.mp4', poster: '/media/posters/5.webp', href: 'https://youtu.be/AkApe4MIjHg',
-    episode: 'EP 1', guest: 'Shri Nandakumar',
+    episode: 'Trailer EP 1', guest: 'Shri Nandakumar',
     title: 'Jewellers, Tax & Truth', subtitle: 'An IRS Officer Speaks' },
   { video: '/media/3.mp4', poster: '/media/posters/3.webp', href: 'https://youtu.be/yvVcvfZDlMo',
-    episode: 'EP 2', guest: 'Mr. SS Alam',
+    episode: 'Trailer EP 2', guest: 'Mr. SS Alam',
     title: 'AI & Hyper Local Sourcing', subtitle: 'Redefining the Fine Jewellery Market' },
+  { video: '/media/4.mp4', poster: '/media/posters/4.webp', href: 'https://youtu.be/GiM-vxTt48Y',
+    episode: 'Trailer EP 3', guest: 'Mr. Nithin',
+    title: 'Market Truth: The Rise of Silver', subtitle: "Gen Z's Future Industry" },
   { video: '/media/1.mp4', poster: '/media/posters/1.webp', href: 'https://youtu.be/d5rM51Gaek4',
-    episode: 'EP 4', guest: 'Mr. K. Srinivasan',
+    episode: 'Trailer EP 4', guest: 'Mr. K. Srinivasan',
     title: 'From ₹100 to Jewellery Empire', subtitle: 'AI, Innovation & Future' },
   { video: '/media/2.mp4', poster: '/media/posters/2.webp', href: 'https://youtu.be/DPnfNZ1utSo',
-    episode: 'EP 5', guest: 'Mr. Karthik Surabi',
+    episode: 'Trailer EP 5', guest: 'Mr. Karthik Surabi',
     title: 'From Jewellery Roots to Bullion Pioneer', subtitle: 'On Silver & Growth' },
-  // Unnumbered, so it brings up the rear rather than interrupting the run.
-  { video: '/media/4.mp4', poster: '/media/posters/4.webp', href: 'https://youtu.be/GiM-vxTt48Y',
-    episode: 'Trailer', guest: 'Mr. Nithin',
-    title: 'Market Truth: The Rise of Silver', subtitle: "Gen Z's Future Industry" },
 ];

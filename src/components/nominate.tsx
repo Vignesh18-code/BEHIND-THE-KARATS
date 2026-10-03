@@ -7,16 +7,16 @@ import { NOMINATE_BENEFITS, SOCIAL } from "@/lib/site-content";
 
 /**
  * Where submissions go. The site is a static export with no server of its own,
- * so the form posts straight to a form service. Both Web3Forms and Formspree
- * accept a plain FormData POST and answer with JSON, so either works: set the
- * endpoint, and the key only if the service wants one.
+ * so the form posts straight to Web3Forms, which emails each one to the inbox
+ * this access key was created for.
  *
- * Set NEXT_PUBLIC_FORM_KEY in the Vercel project (Settings -> Environment
- * Variables) and redeploy. Until it is set, the form tells people it could not
- * send rather than pretending it did.
+ * The key lives here rather than in a hosting variable. Web3Forms keys are
+ * public by design — one can only deliver to its own inbox — and a variable set
+ * on one host is silently missing on the next: that is how the form stopped
+ * sending when the site moved from Vercel to Railway.
  */
-const ENDPOINT = process.env.NEXT_PUBLIC_FORM_ENDPOINT || "https://api.web3forms.com/submit";
-const ACCESS_KEY = process.env.NEXT_PUBLIC_FORM_KEY || "";
+const ENDPOINT = "https://api.web3forms.com/submit";
+const ACCESS_KEY = "e9f9e17a-09a6-401e-a0f5-1e907bf5841a";
 
 const FIELDS = [
   { name: "name", label: "Name", type: "text", placeholder: "Your full name", required: true, half: true },
@@ -48,7 +48,7 @@ export function Nominate() {
     }
 
     setStatus("sending");
-    if (ACCESS_KEY) data.append("access_key", ACCESS_KEY);
+    data.append("access_key", ACCESS_KEY);
     data.append("subject", "New nomination — Behind The Karats");
     try {
       const response = await fetch(ENDPOINT, { method: "POST", body: data, headers: { Accept: "application/json" } });
